@@ -50,6 +50,7 @@
     corectrl
     nps
     tree
+    ripgrep
   ];
 
   services.flatpak.enable = true;

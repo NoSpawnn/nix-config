@@ -39,6 +39,8 @@
       starship
       rustup
       nixd
+      eza
+      zoxide
     ];
   };
 
