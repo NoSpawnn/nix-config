@@ -37,7 +37,7 @@
 
   networking.networkmanager.enable = true;
 
-  environment.variables.EDITOR = "vim";
+  environment.variables.EDITOR = "hx";
   environment.systemPackages = with pkgs; [
     vim
     git
@@ -51,6 +51,9 @@
     nps
     tree
     ripgrep
+    nixd
+    nil
+    helix
   ];
 
   services.flatpak.enable = true;
