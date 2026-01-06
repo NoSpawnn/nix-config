@@ -8,6 +8,10 @@
 }:
 
 {
+  imports = [
+    ./ly.nix
+  ];
+
   programs.niri.enable = true;
   environment.systemPackages = with pkgs; [
     # core for niri
