@@ -22,7 +22,6 @@
     ./hardware-configuration.nix
   ];
 
-  gaming.enable = true;
   gaming.vr.enable = true;
 
   services.pipewire = {

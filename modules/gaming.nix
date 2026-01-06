@@ -14,16 +14,13 @@ in
     inputs.nix-gaming.nixosModules.platformOptimizations
   ];
 
-  options.gaming = {
-    enable = lib.mkEnableOption "Gaming support";
-    vr = {
-      enable = lib.mkEnableOption "VR Support (WiVRn)";
-    };
+  options.gaming.vr = {
+    enable = lib.mkEnableOption "VR Support (WiVRn)";
   };
 
   config = lib.mkMerge [
     # general gaming stuff
-    (lib.mkIf cfg.enable {
+    {
       services.pipewire.lowLatency.enable = true;
       programs.gamemode.enable = true;
       programs.steam = {
@@ -31,7 +28,7 @@ in
         platformOptimizations.enable = true;
         gamescopeSession.enable = true;
       };
-    })
+    }
 
     # VR gaming
     # https://wiki.nixos.org/wiki/VR
