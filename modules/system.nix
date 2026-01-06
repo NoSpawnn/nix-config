@@ -47,7 +47,6 @@
     zip
     unzip
     polkit
-    corectrl
     nps
     tree
     ripgrep

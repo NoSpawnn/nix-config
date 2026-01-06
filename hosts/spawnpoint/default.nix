@@ -49,6 +49,7 @@
 
   hardware.bluetooth.enable = true;
 
+  services.lact.enable = true;
   hardware.amdgpu.overdrive.enable = true;
   hardware.graphics = {
     enable = true;
