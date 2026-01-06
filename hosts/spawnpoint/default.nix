@@ -1,8 +1,8 @@
 {
-  config,
   pkgs,
   ...
 }:
+
 {
   networking.hostName = "spawnpoint";
 
@@ -16,12 +16,14 @@
 
   imports = [
     ../../modules/system.nix
-
+    ../../modules/gaming.nix
     ../../modules/ly.nix
     ../../modules/niri.nix
-
     ./hardware-configuration.nix
   ];
+
+  gaming.enable = true;
+  gaming.vr.enable = true;
 
   services.pipewire = {
     enable = true;
@@ -38,9 +40,11 @@
       zed-editor
       starship
       rustup
-      nixd
       eza
       zoxide
+      direnv
+      orca-slicer
+      lazygit
     ];
   };
 
