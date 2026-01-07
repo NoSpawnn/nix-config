@@ -37,7 +37,6 @@
 
   networking.networkmanager.enable = true;
 
-  environment.variables.EDITOR = "hx";
   environment.systemPackages = with pkgs; [
     vim
     git
