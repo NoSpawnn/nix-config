@@ -2,7 +2,6 @@
 
 {
   inputs,
-  config,
   pkgs,
   ...
 }:
@@ -28,7 +27,7 @@
     swaybg
     swaylock
     swayidle
-    inputs.niri-scratchpad-flake.packages.${pkgs.system}.niri-scratchpad
+    inputs.niri-scratchpad-flake.packages.${pkgs.stdenv.hostPlatform.system}.niri-scratchpad
 
     # additional stuff
     quickshell
