@@ -7,9 +7,6 @@
   ...
 }:
 
-let
-  dotfiles = builtins.fetchGit;
-in
 {
   imports = [
     ./ly.nix
@@ -31,6 +28,7 @@ in
     swaybg
     swaylock
     swayidle
+    inputs.niri-scratchpad-flake.packages.${pkgs.system}.niri-scratchpad
 
     # additional stuff
     quickshell
@@ -38,6 +36,9 @@ in
     brightnessctl
     gpu-screen-recorder
     pavucontrol
+
+    # for config
+    kdlfmt
   ];
 
   security.polkit.enable = true;
