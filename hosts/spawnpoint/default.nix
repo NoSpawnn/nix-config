@@ -1,4 +1,5 @@
 {
+  inputs,
   pkgs,
   ...
 }:
@@ -21,7 +22,7 @@
     ./hardware-configuration.nix
   ];
 
-  gaming.vr.enable = true;
+  vrEnable = true;
 
   services.pipewire = {
     enable = true;
@@ -33,16 +34,6 @@
     extraGroups = [
       "networkmanager"
       "wheel"
-    ];
-    packages = with pkgs; [
-      zed-editor
-      starship
-      rustup
-      eza
-      zoxide
-      direnv
-      orca-slicer
-      lazygit
     ];
   };
 

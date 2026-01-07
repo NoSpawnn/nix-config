@@ -5,18 +5,13 @@
   ...
 }:
 
-let
-  cfg = config.gaming;
-in
 {
   imports = [
     inputs.nix-gaming.nixosModules.pipewireLowLatency
     inputs.nix-gaming.nixosModules.platformOptimizations
   ];
 
-  options.gaming.vr = {
-    enable = lib.mkEnableOption "VR Support (WiVRn)";
-  };
+  options.vrEnable = lib.mkEnableOption "VR Support (WiVRn)";
 
   config = lib.mkMerge [
     # general gaming stuff
@@ -32,7 +27,7 @@ in
 
     # VR gaming
     # https://wiki.nixos.org/wiki/VR
-    (lib.mkIf cfg.vr.enable {
+    (lib.mkIf config.vrEnable {
       services.wivrn = {
         enable = true;
         openFirewall = true;

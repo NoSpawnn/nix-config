@@ -14,22 +14,25 @@
     {
       self,
       nixpkgs,
+      home-manager,
       ...
     }@inputs:
     {
       nixosConfigurations = {
-        spawnpoint = nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit inputs; };
-          modules = [
-            ./hosts/spawnpoint
-            # home-manager.nixosModules.home-manager
-            # {
-            #   home-manager.useGlobalPkgs = true;
-            #   home-manager.useUserPackages = true;
-            #   home-manager.users.${user} = import ./users/${user}/home.nix;
-            # }
-          ];
-        };
+        spawnpoint =
+          nixpkgs.lib.nixosSystem {
+            specialArgs = { inherit inputs; };
+            modules = [
+              ./hosts/spawnpoint
+              home-manager.nixosModules.home-manager
+              {
+                home-manager.extraSpecialArgs = { inherit inputs; };
+                home-manager.useGlobalPkgs = true;
+                home-manager.useUserPackages = true;
+                home-manager.users.red = import ./hosts/spawnpoint/home.nix;
+              }
+            ];
+          };
       };
     };
 }
