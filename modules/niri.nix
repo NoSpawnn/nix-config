@@ -7,6 +7,9 @@
   ...
 }:
 
+let
+  dotfiles = builtins.fetchGit;
+in
 {
   imports = [
     ./ly.nix
@@ -27,6 +30,7 @@
     xwayland-satellite
     swaybg
     swaylock
+    swayidle
 
     # additional stuff
     quickshell
