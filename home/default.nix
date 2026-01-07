@@ -15,6 +15,8 @@
     orca-slicer
     lazygit
     nnn
+    stow
+    fastfetch
   ];
 
   home.sessionVariables = {
