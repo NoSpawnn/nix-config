@@ -9,6 +9,7 @@
 {
   imports = [
     ./ly.nix
+    ./noctalia.nix
   ];
 
   programs.niri.enable = true;
@@ -30,7 +31,7 @@
     inputs.niri-scratchpad-flake.packages.${pkgs.stdenv.hostPlatform.system}.niri-scratchpad
 
     # additional stuff
-    quickshell
+    # quickshell # noctalia-shell installs this for us
     wlsunset
     brightnessctl
     gpu-screen-recorder
