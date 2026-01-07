@@ -52,6 +52,7 @@
     nixd
     nil
     helix
+    zellij
   ];
 
   services.flatpak.enable = true;
