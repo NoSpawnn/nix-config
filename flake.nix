@@ -31,7 +31,7 @@
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.users.red = import ./hosts/spawnpoint/home.nix;
+              home-manager.users.red = import ./home;
             }
           ];
         };
