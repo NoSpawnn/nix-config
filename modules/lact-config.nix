@@ -6,24 +6,17 @@
 }:
 
 let
-  cfg = config.services.lact-oc;
+  cfg = config.services.lact-nix;
   yaml = pkgs.formats.yaml { };
 
   mkGPUConfig =
     gpu:
     let
       powerLimitAttrs = lib.optionalAttrs (gpu.powerLimitW != null) { power_cap = gpu.powerLimitW; };
-      memClockAttrs =
-        lib.optionalAttrs (gpu.memClockMinMHz != null)
-          {
-            min_memory_clock = builtins.div gpu.memClockMinMHz 2;
-          }
-
-          lib.optionalAttrs
-          (gpu.memClockMinMHz != null)
-          {
-            max_memory_clock = builtins.div gpu.memClockMaxMHz 2;
-          };
+      memClockAttrs = lib.optionalAttrs (gpu.memClockMinMHz != null || gpu.memClockMaxMHz != null) {
+        min_memory_clock = if gpu.memClockMinMHz != null then builtins.div gpu.memClockMinMHz 2 else null;
+        max_memory_clock = if gpu.memClockMaxMHz != null then builtins.div gpu.memClockMaxMHz 2 else null;
+      };
     in
     {
       fan_control_enabled = gpu.enableFanControl;
@@ -42,54 +35,58 @@ in
     # lact cli list-gpus
     gpus = lib.mkOption {
       description = "Per-GPU LACT configuration";
+      default = { };
       type = lib.types.attrsOf (
         lib.types.submodule (
           { name, ... }:
           {
-            enableFanControl = lib.mkOption {
-              type = lib.types.bool;
-              default = false;
-              description = "Enable fan control";
-            };
+            options = {
+              enableFanControl = lib.mkOption {
+                type = lib.types.bool;
+                default = false;
+                description = "Enable fan control";
+              };
 
-            powerLimitW = lib.mkOption {
-              type = lib.types.int;
-              description = "Power limit in watts";
-            };
+              powerLimitW = lib.mkOption {
+                type = lib.types.nullOr lib.types.int;
+                default = null;
+                description = "Power limit in watts";
+              };
 
-            voltageOffsetMv = lib.mkOption {
-              type = lib.types.int;
-              default = 0;
-              description = "Voltage offset in millivolts";
-            };
+              voltageOffsetMv = lib.mkOption {
+                type = lib.types.int;
+                default = 0;
+                description = "Voltage offset in millivolts";
+              };
 
-            coreClockOffsetMHz = lib.mkOption {
-              type = lib.types.int;
-              default = 0;
-              description = "Core clock offset in MHz";
-            };
+              coreClockOffsetMHz = lib.mkOption {
+                type = lib.types.int;
+                default = 0;
+                description = "Core clock offset in MHz";
+              };
 
-            memClockMinMHz = lib.mkOption {
-              type = lib.types.nullOr lib.types.int;
-              default = null;
-              description = "Minimum memory clock in MHz";
-            };
+              memClockMinMHz = lib.mkOption {
+                type = lib.types.nullOr lib.types.int;
+                default = null;
+                description = "Minimum memory clock in MHz";
+              };
 
-            memClockMaxMHz = lib.mkOption {
-              type = lib.types.nullOr lib.types.int;
-              default = null;
-              description = "Maximum memory clock in MHz";
-            };
+              memClockMaxMHz = lib.mkOption {
+                type = lib.types.nullOr lib.types.int;
+                default = null;
+                description = "Maximum memory clock in MHz";
+              };
 
-            perfLevel = lib.mkOption {
-              type = lib.types.enum [
-                "auto"
-                "highest"
-                "lowest"
-                "manual"
-              ];
-              default = "auto";
-              description = "Preferred performance level";
+              perfLevel = lib.mkOption {
+                type = lib.types.enum [
+                  "auto"
+                  "highest"
+                  "lowest"
+                  "manual"
+                ];
+                default = "auto";
+                description = "Preferred performance level";
+              };
             };
           }
         )
@@ -97,7 +94,7 @@ in
     };
 
     daemon = {
-      adminGroup = {
+      adminGroup = lib.mkOption {
         type = lib.types.str;
         default = "wheel";
       };
@@ -113,11 +110,11 @@ in
         default = "info";
         description = "LACT daemon log level";
       };
-    };
 
-    clocksCleanupEnable = lib.mkOption {
-      type = lib.types.bool;
-      default = false;
+      clocksCleanupEnable = lib.mkOption {
+        type = lib.types.bool;
+        default = false;
+      };
     };
   };
 
