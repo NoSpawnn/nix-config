@@ -8,7 +8,6 @@
   home.username = "red";
   home.homeDirectory = "/home/red";
   home.packages = with pkgs; [
-    zed-editor
     starship
     rustup
     eza
