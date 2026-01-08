@@ -4,7 +4,6 @@
 {
   config,
   lib,
-  pkgs,
   modulesPath,
   ...
 }:
@@ -24,7 +23,7 @@
   ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-amd" ];
-  boot.extraModulePackages = [ ];
+  boot.extraModulePackages = with config.boot.kernelPackages; [ ];
 
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/58672e88-7bed-4e89-9003-bc6c3078723b";

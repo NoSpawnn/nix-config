@@ -1,11 +1,12 @@
 {
-  inputs,
   pkgs,
   ...
 }:
 
 {
   networking.hostName = "spawnpoint";
+
+  boot.kernelPackages = pkgs.linuxPackages_6_18;
 
   boot.loader = {
     efi = {
