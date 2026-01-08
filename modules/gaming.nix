@@ -2,6 +2,7 @@
   inputs,
   lib,
   config,
+  pkgs,
   ...
 }:
 
@@ -16,12 +17,19 @@
   config = lib.mkMerge [
     # general gaming stuff
     {
+      environment.systemPackages = [ pkgs.mangohud ];
+      programs.gamescope = {
+        # https://github.com/ValveSoftware/gamescope/issues/1622
+        enable = true;
+        package = pkgs.gamescope.overrideAttrs (_: {
+          NIX_CFLAGS_COMPILE = [ "-fno-fast-math" ];
+        });
+      };
       services.pipewire.lowLatency.enable = true;
       programs.gamemode.enable = true;
       programs.steam = {
         enable = true;
         platformOptimizations.enable = true;
-        gamescopeSession.enable = true;
       };
     }
 
