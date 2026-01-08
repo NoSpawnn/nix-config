@@ -14,7 +14,7 @@
     direnv
     orca-slicer
     lazygit
-    nnn
+    yazi
     stow
     fastfetch
   ];
