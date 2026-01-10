@@ -38,14 +38,14 @@
   # https://git.sapphiccode.net/SapphicCode/universe/src/commit/390460d420eb2e0b9f345a656857581baa15ead4/home-manager/profile/minimal.nix#L16
   # https://github.com/budimanjojo/nix-config/blob/427b7fb56990fbbd56507aeafbec55835814e719/home/_modules/programs/chezmoi/default.nix#L18
   home.activation.chezmoi = lib.hm.dag.entryAfter [ "installPackages" ] ''
-    # we only want to run this on first install
-    [[ -d "$(chezmoi source-path)" ]] && exit 0
-
     _path="$PATH"
-
     PATH="${pkgs.chezmoi}/bin:$PATH"
-    run chezmoi init git.nospawnn.com/red/dotfiles
-    run chezmoi update -a
+
+    # we only want to run this on first install
+    if [[ ! -d "$(chezmoi source-path)" ]]; then
+      run chezmoi init git.nospawnn.com/red/dotfiles
+      run chezmoi apply --force
+    fi
 
     PATH="$_path"
   '';
