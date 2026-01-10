@@ -12,6 +12,7 @@ in
   options.modules.chezmoi = {
     dotfilesRepoUrl = lib.mkOption {
       type = lib.types.str;
+      description = "git repository for chezmoi to pull from";
     };
   };
 
