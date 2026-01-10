@@ -21,7 +21,7 @@
     "flake-utils": {
       "inputs": {
         "systems": [
-          "niri-scratchpad-flake",
+          "niri-scratchpad",
           "systems"
         ]
       },
@@ -59,7 +59,7 @@
         "type": "github"
       }
     },
-    "niri-scratchpad-flake": {
+    "niri-scratchpad": {
       "inputs": {
         "flake-utils": "flake-utils",
         "nixpkgs": [
@@ -171,7 +171,7 @@
     "root": {
       "inputs": {
         "home-manager": "home-manager",
-        "niri-scratchpad-flake": "niri-scratchpad-flake",
+        "niri-scratchpad": "niri-scratchpad",
         "nix-gaming": "nix-gaming",
         "nixpkgs": "nixpkgs_2",
         "noctalia": "noctalia"

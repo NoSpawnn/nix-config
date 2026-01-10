@@ -27,7 +27,7 @@
     xwayland-satellite
     swaybg
     swaylock
-    inputs.niri-scratchpad-flake.packages.${pkgs.stdenv.hostPlatform.system}.niri-scratchpad
+    inputs.niri-scratchpad.packages.${pkgs.stdenv.hostPlatform.system}.niri-scratchpad
 
     # additional stuff
     # quickshell # noctalia-shell installs this for us
