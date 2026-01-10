@@ -25,7 +25,7 @@
     ./hardware-configuration.nix
   ];
 
-  vrEnable = true;
+  modules.gaming.vr.enable = true;
 
   services.pipewire = {
     enable = true;
