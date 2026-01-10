@@ -1,9 +1,14 @@
 {
   pkgs,
+  config,
   ...
 }:
 
 {
+  imports = [
+    ./tailscale.nix  
+  ];
+  
   nix.gc = {
     automatic = true;
     dates = "weekly";

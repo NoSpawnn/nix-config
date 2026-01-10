@@ -23,6 +23,7 @@
   };
 
   modules = {
+    tailscale.enable = true;
     gaming = {
       enable = true;
       vr.enable = true;
