@@ -45,6 +45,24 @@
                 home-manager.users = lib.genAttrs users (user: import ./home/users/${user}.nix);
               }
             ];
+	};
+
+         lenowo =
+          let
+            users = [ "red" ];
+            inherit (nixpkgs) lib;
+          in
+          nixpkgs.lib.nixosSystem {
+            specialArgs = { inherit inputs; };
+            modules = [
+              ./hosts/lenowo
+              home-manager.nixosModules.home-manager
+              {
+                home-manager.useGlobalPkgs = true;
+                home-manager.useUserPackages = true;
+                home-manager.users = lib.genAttrs users (user: import ./home/users/${user}.nix);
+              }
+            ];
           };
       };
     };
