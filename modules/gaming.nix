@@ -17,7 +17,6 @@
   config = lib.mkMerge [
     # general gaming stuff
     {
-      environment.systemPackages = [ pkgs.mangohud ];
       programs.gamescope = {
         # https://github.com/ValveSoftware/gamescope/issues/1622
         enable = true;
@@ -30,6 +29,7 @@
       programs.steam = {
         enable = true;
         platformOptimizations.enable = true;
+        extraPackages = [ pkgs.mangohud ];
       };
     }
 
