@@ -53,6 +53,7 @@
     nil
     helix
     zellij
+    ethtool
   ];
 
   services.flatpak.enable = true;
