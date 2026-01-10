@@ -20,6 +20,8 @@
     ../../modules/system.nix
     ../../modules/gaming.nix
     ../../modules/niri.nix
+    ../../modules/development.nix
+
     ./hardware-configuration.nix
   ];
 
