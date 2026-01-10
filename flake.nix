@@ -45,9 +45,9 @@
                 home-manager.users = lib.genAttrs users (user: import ./home/users/${user}.nix);
               }
             ];
-	};
+          };
 
-         lenowo =
+        lenowo =
           let
             users = [ "red" ];
             inherit (nixpkgs) lib;
