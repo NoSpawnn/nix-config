@@ -29,7 +29,6 @@
     nil
     tealdeer
     zellij
-    chezmoi
   ];
 
   home.sessionVariables = {
