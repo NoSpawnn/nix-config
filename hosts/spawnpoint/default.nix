@@ -4,32 +4,29 @@
 }:
 
 {
-  networking.hostName = "spawnpoint";
-
-  boot.kernelPackages = pkgs.linuxPackages_6_18;
-
-  boot.loader = {
-    efi = {
-      canTouchEfiVariables = true;
-      efiSysMountPoint = "/boot";
-    };
-    systemd-boot.enable = true;
-  };
-
   imports = [
-    ../../modules/system.nix
-    ../../modules/gaming.nix
-    ../../modules/niri.nix
-    ../../modules/development.nix
-
+    ../../profiles/pc.nix
     ./hardware-configuration.nix
   ];
 
-  modules.gaming.vr.enable = true;
+  networking.hostName = "spawnpoint";
 
-  services.pipewire = {
-    enable = true;
-    pulse.enable = true;
+  boot = {
+    kernelPackages = pkgs.linuxPackages_6_18;
+    loader = {
+      efi = {
+        canTouchEfiVariables = true;
+        efiSysMountPoint = "/boot";
+      };
+      systemd-boot.enable = true;
+    };
+  };
+
+  modules = {
+    gaming = {
+      enable = true;
+      vr.enable = true;
+    };
   };
 
   users.users.red = {

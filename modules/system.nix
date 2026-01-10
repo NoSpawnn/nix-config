@@ -1,18 +1,9 @@
 {
-  lib,
   pkgs,
-  user,
   ...
 }:
 
 {
-  nix.settings.experimental-features = [
-    "nix-command"
-    "flakes"
-  ];
-
-  nixpkgs.config.allowUnfree = true;
-
   nix.gc = {
     automatic = true;
     dates = "weekly";
@@ -41,7 +32,6 @@
     vim
     git
     fzf
-    tealdeer
     corefonts # ms-corefonts
     zip
     unzip
@@ -49,16 +39,6 @@
     nps
     tree
     ripgrep
-    nixd
-    nil
-    helix
-    zellij
     ethtool
   ];
-
-  services.flatpak.enable = true;
-  programs.appimage = {
-    enable = true;
-    binfmt = true;
-  };
 }
