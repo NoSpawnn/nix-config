@@ -14,21 +14,28 @@
   home.username = "red";
   home.homeDirectory = "/home/red";
   home.packages = with pkgs; [
+    # shell
     starship
-    rustup
     eza
     zoxide
-    direnv
-    orca-slicer
-    lazygit
-    yazi
-    stow
-    fastfetch
-    helix
+
+    # dev
     nixd
     nil
-    tealdeer
+    rustup
+    direnv
+
+    # tui
+    lazygit
+    yazi
     zellij
+    helix
+
+    # tools
+    fastfetch
+    tealdeer
+
+    orca-slicer
   ];
 
   home.sessionVariables = {
