@@ -1,5 +1,8 @@
-{ ... }:
+{ pkgs, flake-inputs, ... }:
 
+let
+  zen-browser = flake-inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default;
+in
 {
   imports = [
     ./base.nix
@@ -14,6 +17,8 @@
     enable = true;
     pulse.enable = true;
   };
+
+  environment.systemPackages = [ zen-browser ];
 
   # Other package formats
   services.flatpak.enable = true;
