@@ -1,15 +1,19 @@
 # currently just installation of niri and supporting packages, configuration is not handled in Nix (yet?)
 
 {
-  inputs,
+  flake-inputs,
   pkgs,
   ...
 }:
 
+let
+  noctalia = flake-inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default;
+  niri-scratchpad =
+    flake-inputs.niri-scratchpad.packages.${pkgs.stdenv.hostPlatform.system}.niri-scratchpad;
+in
 {
   imports = [
     ./ly.nix
-    ./noctalia.nix
   ];
 
   programs.niri.enable = true;
@@ -27,7 +31,8 @@
     xwayland-satellite
     swaybg
     swaylock
-    inputs.niri-scratchpad.packages.${pkgs.stdenv.hostPlatform.system}.niri-scratchpad
+    niri-scratchpad
+    noctalia
 
     # additional stuff
     # quickshell # noctalia-shell installs this for us

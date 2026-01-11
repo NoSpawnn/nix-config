@@ -4,6 +4,7 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nix-gaming.url = "github:fufexan/nix-gaming/4199abcbc86b52e6878d1021da61c4e8e308e00e";
+    nix-flatpak.url = "github:gmodena/nix-flatpak/latest";
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -35,13 +36,14 @@
             inherit (nixpkgs) lib;
           in
           nixpkgs.lib.nixosSystem {
-            specialArgs = { inherit inputs; };
+            specialArgs.flake-inputs = inputs;
             modules = [
               ./hosts/spawnpoint
               home-manager.nixosModules.home-manager
               {
                 home-manager.useGlobalPkgs = true;
                 home-manager.useUserPackages = true;
+                home-manager.extraSpecialArgs.flake-inputs = inputs;
                 home-manager.users = lib.genAttrs users (user: import ./home/users/${user}.nix);
               }
             ];

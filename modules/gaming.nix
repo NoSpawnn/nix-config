@@ -1,5 +1,5 @@
 {
-  inputs,
+  flake-inputs,
   lib,
   config,
   pkgs,
@@ -8,7 +8,7 @@
 
 let
   cfg = config.modules.gaming;
-  nix-gaming = inputs.nix-gaming;
+  nix-gaming = flake-inputs.nix-gaming;
 in
 {
   imports = [
