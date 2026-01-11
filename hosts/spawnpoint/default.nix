@@ -11,6 +11,8 @@
 
   networking.hostName = "spawnpoint";
 
+  networking.interfaces."enp11s0".wakeOnLan.enable = true;
+
   boot = {
     kernelPackages = pkgs.linuxPackages_6_18;
     loader = {
