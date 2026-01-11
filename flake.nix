@@ -31,7 +31,7 @@
       nixosConfigurations = {
         spawnpoint =
           let
-            users = [ "red" ];
+            users = [ "N" ];
             inherit (nixpkgs) lib;
           in
           nixpkgs.lib.nixosSystem {
@@ -50,7 +50,7 @@
         lenowo =
           let
             users = [
-              "red"
+              "N"
               "Z"
             ];
             inherit (nixpkgs) lib;

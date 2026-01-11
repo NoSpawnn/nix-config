@@ -23,7 +23,7 @@
   };
 
   users.users = {
-    red = {
+    N = {
       isNormalUser = true;
       extraGroups = [
         "networkmanager"

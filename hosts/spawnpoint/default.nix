@@ -30,7 +30,7 @@
     };
   };
 
-  users.users.red = {
+  users.users.N = {
     isNormalUser = true;
     extraGroups = [
       "networkmanager"

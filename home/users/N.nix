@@ -1,3 +1,5 @@
+# regular user
+
 {
   pkgs,
   ...
@@ -14,8 +16,8 @@
     forceApply = true;
   };
 
-  home.username = "red";
-  home.homeDirectory = "/home/red";
+  home.username = "N";
+  home.homeDirectory = "/home/N";
   home.packages = with pkgs; [
     # shell
     starship
