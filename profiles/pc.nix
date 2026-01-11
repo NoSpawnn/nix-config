@@ -4,7 +4,7 @@
   imports = [
     ./base.nix
 
-    ../modules/niri.nix
+    ../modules/gui/niri.nix
     ../modules/gaming.nix
     ../modules/development.nix
   ];
