@@ -9,7 +9,10 @@
     ../modules/chezmoi.nix
   ];
 
-  modules.chezmoi.dotfilesRepoUrl = "git.nospawnn.com/red/dotfiles";
+  modules.chezmoi = {
+    dotfilesRepoUrl = "git.nospawnn.com/red/dotfiles";
+    forceApply = true;
+  };
 
   home.username = "red";
   home.homeDirectory = "/home/red";
