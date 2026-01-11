@@ -13,9 +13,7 @@ let
   };
 in
 {
-  imports = [
-    ./ly.nix
-  ];
+  imports = [ ./ly.nix ];
 
   programs.niri.enable = true;
   environment.systemPackages =
