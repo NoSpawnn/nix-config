@@ -32,6 +32,7 @@
 
   users.users.N = {
     isNormalUser = true;
+    description = "I love doing anything!";
     extraGroups = [
       "networkmanager"
       "wheel"

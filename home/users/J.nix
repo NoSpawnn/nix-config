@@ -16,8 +16,8 @@
     forceApply = true;
   };
 
-  home.username = "Z";
-  home.homeDirectory = "/home/Z";
+  home.username = "J";
+  home.homeDirectory = "/home/J";
   home.packages = with pkgs; [
     starship
     rustup

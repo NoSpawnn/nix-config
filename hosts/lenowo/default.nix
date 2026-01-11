@@ -24,13 +24,15 @@
 
   users.users = {
     N = {
+      description = "I love doing anything!";
       isNormalUser = true;
       extraGroups = [
         "networkmanager"
         "wheel"
       ];
     };
-    Z = {
+    J = {
+      description = "Sorry boss. Corporate's spoken";
       isNormalUser = true;
       extraGroups = [
         "networkmanager"

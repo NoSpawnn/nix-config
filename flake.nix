@@ -51,7 +51,7 @@
           let
             users = [
               "N"
-              "Z"
+              "J"
             ];
             inherit (nixpkgs) lib;
           in
