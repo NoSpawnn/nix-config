@@ -22,12 +22,21 @@
     };
   };
 
-  users.users.red = {
-    isNormalUser = true;
-    extraGroups = [
-      "networkmanager"
-      "wheel"
-    ];
+  users.users = {
+    red = {
+      isNormalUser = true;
+      extraGroups = [
+        "networkmanager"
+        "wheel"
+      ];
+    };
+    Z = {
+      isNormalUser = true;
+      extraGroups = [
+        "networkmanager"
+        "wheel"
+      ];
+    };
   };
 
   hardware.bluetooth.enable = true;

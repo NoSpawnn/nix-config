@@ -39,7 +39,7 @@ in
 
       mkdir -p "${cfg.dotfilesDir}"
       run $chezmoi init "${cfg.dotfilesRepoUrl}" -S "${cfg.dotfilesDir}"
-      run $chezmoi apply --mode symlink ${if cfg.forceApply then "--force" else ""} 
+      run $chezmoi apply --mode symlink ${if cfg.forceApply then "--force" else ""} -S "${cfg.dotfilesDir}"
     '';
   };
 }

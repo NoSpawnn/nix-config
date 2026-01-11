@@ -49,7 +49,10 @@
 
         lenowo =
           let
-            users = [ "red" ];
+            users = [
+              "red"
+              "Z"
+            ];
             inherit (nixpkgs) lib;
           in
           nixpkgs.lib.nixosSystem {
