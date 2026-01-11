@@ -12,7 +12,7 @@ in
   options.modules.chezmoi = {
     dotfilesDir = lib.mkOption {
       type = lib.types.path;
-      default = "/home/${config.home.username}/.dotfiles";
+      default = "${config.home.homeDirectory}/.dotfiles";
       description = "directory for chezmoi to pull into. should match sourceDir in chezmoi config";
     };
     dotfilesRepoUrl = lib.mkOption {
