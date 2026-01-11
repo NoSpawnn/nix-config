@@ -34,47 +34,56 @@
       home-manager,
       ...
     }@inputs:
-    {
-      nixosConfigurations = {
-        spawnpoint =
-          let
-            users = [ "N" ];
-            inherit (nixpkgs) lib;
-          in
-          nixpkgs.lib.nixosSystem {
-            specialArgs.flake-inputs = inputs;
-            modules = [
-              ./hosts/spawnpoint
-              home-manager.nixosModules.home-manager
-              {
-                home-manager.useGlobalPkgs = true;
-                home-manager.useUserPackages = true;
-                home-manager.extraSpecialArgs.flake-inputs = inputs;
-                home-manager.users = lib.genAttrs users (user: import ./home/users/${user}.nix);
-              }
-            ];
-          };
+    let
+      inherit (nixpkgs) lib;
 
-        lenowo =
-          let
-            users = [
-              "N"
-              "J"
-            ];
-            inherit (nixpkgs) lib;
-          in
-          nixpkgs.lib.nixosSystem {
-            specialArgs = { inherit inputs; };
-            modules = [
-              ./hosts/lenowo
-              home-manager.nixosModules.home-manager
-              {
-                home-manager.useGlobalPkgs = true;
-                home-manager.useUserPackages = true;
-                home-manager.users = lib.genAttrs users (user: import ./home/users/${user}.nix);
-              }
-            ];
-          };
+      # ------------------
+      # System definitions
+      # ------------------
+
+      hosts = {
+        spawnpoint = {
+          users = [ "N" ];
+        };
+
+        lenowo = {
+          users = [
+            "N"
+            "J"
+          ];
+        };
       };
+
+      # ---------
+      # Functions
+      # ---------
+
+      mkHost =
+        {
+          name,
+          config,
+        }:
+        nixpkgs.lib.nixosSystem {
+          specialArgs.flake-inputs = inputs;
+          modules = [
+            ./hosts/${name}
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.extraSpecialArgs.flake-inputs = inputs;
+              home-manager.users = lib.genAttrs config.users (user: import ./home/users/${user}.nix);
+            }
+          ];
+        };
+    in
+    {
+      nixosConfigurations = lib.mapAttrs (
+        systemName: systemConfig:
+        mkHost {
+          name = systemName;
+          config = systemConfig;
+        }
+      ) hosts;
     };
 }
