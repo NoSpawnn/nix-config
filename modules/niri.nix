@@ -7,7 +7,7 @@
 }:
 
 let
-  noctalia = flake-inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default;
+  noctalia-shell = flake-inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default;
   niri-scratchpad =
     flake-inputs.niri-scratchpad.packages.${pkgs.stdenv.hostPlatform.system}.niri-scratchpad;
 in
@@ -32,7 +32,7 @@ in
     swaybg
     swaylock
     niri-scratchpad
-    noctalia
+    noctalia-shell
 
     # additional stuff
     # quickshell # noctalia-shell installs this for us
