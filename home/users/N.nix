@@ -41,6 +41,7 @@
     tealdeer
 
     orca-slicer
+    vesktop
   ];
 
   home.sessionVariables = {
