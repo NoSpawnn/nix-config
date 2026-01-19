@@ -9,6 +9,7 @@
   imports = [
     ../modules/wayland.nix
     ../modules/chezmoi.nix
+    ../modules/flatpak.nix
   ];
 
   modules.chezmoi = {
