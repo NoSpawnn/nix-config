@@ -29,12 +29,12 @@
     nil
     rustup
     direnv
+    zed-editor
 
     # tui
     lazygit
     yazi
     zellij
-    helix
 
     # tools
     fastfetch
@@ -45,7 +45,7 @@
   ];
 
   home.sessionVariables = {
-    "EDITOR" = "hx";
+    "EDITOR" = "zeditor --wait";
   };
 
   programs.home-manager.enable = true;
