@@ -30,6 +30,7 @@
     rustup
     direnv
     zed-editor
+    quickemu
 
     # tui
     lazygit
