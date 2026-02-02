@@ -43,6 +43,7 @@
 
     orca-slicer
     vesktop
+    obs-studio
   ];
 
   home.sessionVariables = {
