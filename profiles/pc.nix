@@ -18,7 +18,7 @@ in
     pulse.enable = true;
   };
 
-  environment.systemPackages = [ zen-browser ];
+  environment.systemPackages = with pkgs; [ tor-browser ] ++ [ zen-browser ];
 
   # Other package formats
   services.flatpak.enable = true;
