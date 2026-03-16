@@ -31,6 +31,9 @@
       enable = true;
       vr.enable = true;
     };
+    development = {
+      godot.enable = true;
+    };
   };
 
   users.users.N = {
