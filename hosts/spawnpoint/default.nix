@@ -13,6 +13,8 @@
 
   networking.interfaces."enp11s0".wakeOnLan.enable = true;
 
+  environment.systemPackages = [ pkgs.jan ];
+
   boot = {
     kernelPackages = pkgs.linuxPackages_6_18;
     loader = {
