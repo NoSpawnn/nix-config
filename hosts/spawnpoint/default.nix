@@ -10,7 +10,6 @@
   ];
 
   networking.hostName = "spawnpoint";
-
   networking.interfaces."enp11s0".wakeOnLan.enable = true;
 
   environment.systemPackages = [ pkgs.jan ];
