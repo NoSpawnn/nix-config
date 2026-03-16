@@ -8,6 +8,7 @@ in
     ./base.nix
 
     ../modules/gui/niri.nix
+    ../modules/gui/kde.nix
     ../modules/gaming.nix
     ../modules/development.nix
   ];
