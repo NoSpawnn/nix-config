@@ -9,5 +9,5 @@ let
 in
 {
   options.modules.tailscale.enable = lib.mkEnableOption "Tailscale";
-  config = lib.mkIf cfg.enable { services.tailscale.enable = cfg.enable; };
+  config = { services.tailscale.enable = cfg.enable; };
 }
