@@ -14,7 +14,11 @@ in
   };
 
   config = lib.mkMerge [
-    { virtualisation.podman.enable = true; }
+    { virtualisation = { 
+        podman.enable = true; 
+        docker.enable = true;
+        };
+    }
     (lib.mkIf cfg.godot.enable { environment.systemPackages = [ pkgs.godot ]; })
   ];
 }
