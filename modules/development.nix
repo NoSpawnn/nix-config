@@ -9,12 +9,10 @@ let
   cfg = config.modules.development;
 in
 {
-  options.modules.development = {
-    godot.enable = lib.mkEnableOption "Godot engine";
+  config = {
+      virtualisation.docker.enable = true;
+      virtualisation.podman.enable = true;
+      networking.nftables.enable = true;
+      virtualisation.incus.enable = true;
   };
-
-  config = lib.mkMerge [
-    { virtualisation.podman.enable = true; }
-    (lib.mkIf cfg.godot.enable { environment.systemPackages = [ pkgs.godot ]; })
-  ];
 }
