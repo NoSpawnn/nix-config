@@ -12,8 +12,6 @@
   networking.hostName = "spawnpoint";
   networking.interfaces."enp11s0".wakeOnLan.enable = true;
 
-  environment.systemPackages = [ pkgs.jan ];
-
   boot = {
     kernelPackages = pkgs.linuxPackages_6_18;
     loader = {
@@ -31,18 +29,16 @@
       enable = true;
       vr.enable = true;
     };
-    development = {
-      godot.enable = true;
-    };
   };
 
   users.users.N = {
     isNormalUser = true;
-    description = "I love doing anything!";
     extraGroups = [
       "networkmanager"
       "wheel"
       "dialout"
+      "docker"
+      "incus-admin"
     ];
   };
 

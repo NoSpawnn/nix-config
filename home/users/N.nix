@@ -25,12 +25,13 @@
     zoxide
 
     # dev
+    zed-editor
     nixd
     nil
     rustup
     direnv
-    zed-editor
     quickemu
+    godot
 
     # tui
     lazygit
@@ -44,6 +45,7 @@
     orca-slicer
     vesktop
     obs-studio
+    jan
   ];
 
   home.sessionVariables = {
