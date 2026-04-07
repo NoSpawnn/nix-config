@@ -14,5 +14,6 @@ in
       virtualisation.podman.enable = true;
       networking.nftables.enable = true;
       virtualisation.incus.enable = true;
+      environment.systemPackages = [ pkgs.aardvark-dns ];
   };
 }
