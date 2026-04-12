@@ -32,6 +32,8 @@
     direnv
     quickemu
     godot
+    typst
+    tinymist
 
     # tui
     lazygit
