@@ -11,6 +11,7 @@
 
   networking.hostName = "spawnpoint";
   networking.interfaces."enp11s0".wakeOnLan.enable = true;
+  services.openssh.enable = true;
 
   boot = {
     kernelPackages = pkgs.linuxPackages_6_18;
