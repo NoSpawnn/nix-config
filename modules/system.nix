@@ -5,9 +5,9 @@
 
 {
   imports = [
-    ./tailscale.nix  
+    ./tailscale.nix
   ];
-  
+
   nix.gc = {
     automatic = true;
     dates = "weekly";
