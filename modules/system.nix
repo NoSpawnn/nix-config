@@ -36,6 +36,7 @@
     nps
     tree
     ripgrep
+    fd
     ethtool
   ];
 }
