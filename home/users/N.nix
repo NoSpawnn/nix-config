@@ -25,6 +25,8 @@
     zoxide
 
     # dev
+    neovim
+    lua-language-server
     zed-editor
     nixd
     nil
