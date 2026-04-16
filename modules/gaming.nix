@@ -34,6 +34,7 @@ in
         };
         services.pipewire.lowLatency.enable = true;
         programs.gamemode.enable = true;
+        environment.systemPackages = [ pkgs.protonup-qt ];
         programs.steam = {
           enable = true;
           platformOptimizations.enable = true;
