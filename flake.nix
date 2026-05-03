@@ -111,6 +111,7 @@
           default = pkgs.mkShell {
             packages = with pkgs; [
               nil
+              nixd
               self.formatter.${system}
             ];
           };
