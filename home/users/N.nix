@@ -27,7 +27,6 @@
     # dev
     neovim
     lua-language-server
-    zed-editor
     nixd
     nil
     rustup
@@ -53,7 +52,7 @@
   ];
 
   home.sessionVariables = {
-    "EDITOR" = "zeditor --wait";
+    "EDITOR" = "nvim";
   };
 
   programs.home-manager.enable = true;
