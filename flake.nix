@@ -38,73 +38,73 @@
     let
       inherit (nixpkgs) lib;
 
-      # ------------------
-      # System definitions
-      # ------------------
-
-      hosts = {
-        spawnpoint = {
-          users = [ "N" ];
-        };
-
-        lenowo = {
-          users = [
-            "N"
-            "J"
-          ];
-        };
+      hm = home-manager.nixosModules.home-manager;
+      hmDefaultOpts = {
+        home-manager.useGlobalPkgs = true;
+        home-manager.useUserPackages = true;
+        home-manager.extraSpecialArgs.flake-inputs = inputs;
       };
 
-      # ---------
-      # Functions
-      # ---------
-
-      architectures = [
-        "x86_64-linux"
-        "aarch64-linux"
-        "aarch64-darwin"
-      ];
+      nixosSystemDefaultOpts = {
+        specialArgs.flake-inputs = inputs;
+      };
 
       forEachSupportedSystem =
         f:
-        lib.genAttrs architectures (
-          system:
-          f {
-            inherit system;
-            pkgs = import nixpkgs { inherit system; };
+        lib.genAttrs
+          [
+            "x86_64-linux"
+            "aarch64-linux"
+            "aarch64-darwin"
+          ]
+          (
+            system:
+            f {
+              inherit system;
+              pkgs = import nixpkgs { inherit system; };
+            }
+          );
+    in
+    {
+      nixosConfigurations = {
+        spawnpoint = lib.nixosSystem (
+          nixosSystemDefaultOpts
+          // {
+            modules = [
+              ./hosts/spawnpoint
+              hm
+              (
+                hmDefaultOpts
+                // {
+                  home-manager.users = {
+                    N = import ./home/users/N.nix;
+                  };
+                }
+              )
+            ];
           }
         );
 
-      mkHost =
-        {
-          name,
-          config,
-        }:
-        nixpkgs.lib.nixosSystem {
-          specialArgs.flake-inputs = inputs;
-          modules = [
-            ./hosts/${name}
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.extraSpecialArgs.flake-inputs = inputs;
-              home-manager.users = lib.genAttrs config.users (user: import ./home/users/${user}.nix);
-            }
-          ];
-        };
-    in
-    {
-      nixosConfigurations = lib.mapAttrs (
-        systemName: systemConfig:
-        mkHost {
-          name = systemName;
-          config = systemConfig;
-        }
-      ) hosts;
+        lenowo = lib.nixosSystem (
+          nixosSystemDefaultOpts
+          // {
+            modules = [
+              ./hosts/lenowo
+              hm
+              (
+                hmDefaultOpts
+                // {
+                  home-manager.users = {
+                    N = import ./home/users/N.nix;
+                  };
+                }
+              )
+            ];
+          }
+        );
+      };
 
       formatter = forEachSupportedSystem ({ pkgs, ... }: pkgs.nixfmt);
-
       devShells = forEachSupportedSystem (
         { pkgs, system }:
         {
