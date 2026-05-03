@@ -8,13 +8,7 @@
 {
   imports = [
     ../modules/wayland.nix
-    ../modules/chezmoi.nix
   ];
-
-  modules.chezmoi = {
-    dotfilesRepoUrl = "git.nospawnn.com/red/dotfiles";
-    forceApply = true;
-  };
 
   home.username = "N";
   home.homeDirectory = "/home/N";
@@ -26,9 +20,6 @@
 
     # dev
     neovim
-    lua-language-server
-    nixd
-    nil
     rustup
     direnv
     quickemu
