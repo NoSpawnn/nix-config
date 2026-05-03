@@ -1,6 +1,5 @@
 {
   pkgs,
-  lib,
   ...
 }:
 
@@ -15,7 +14,7 @@
   modules.tailscale.enable = true;
 
   boot = {
-    kernelPackages = pkgs.linuxPackages_6_18;
+    kernelPackages = pkgs.linuxPackages_latest;
     loader = {
       efi = {
         canTouchEfiVariables = true;
@@ -26,20 +25,11 @@
 
   users.users = {
     N = {
-      description = "I love doing anything!";
       isNormalUser = true;
       extraGroups = [
         "networkmanager"
         "wheel"
         "docker"
-      ];
-    };
-    J = {
-      description = "Sorry boss. Corporate's spoken";
-      isNormalUser = true;
-      extraGroups = [
-        "networkmanager"
-        "wheel"
       ];
     };
   };
