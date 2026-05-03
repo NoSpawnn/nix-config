@@ -30,6 +30,7 @@
 
   outputs =
     {
+      self,
       nixpkgs,
       home-manager,
       ...
@@ -57,6 +58,22 @@
       # ---------
       # Functions
       # ---------
+
+      architectures = [
+        "x86_64-linux"
+        "aarch64-linux"
+        "aarch64-darwin"
+      ];
+
+      forEachSupportedSystem =
+        f:
+        lib.genAttrs architectures (
+          system:
+          f {
+            inherit system;
+            pkgs = import nixpkgs { inherit system; };
+          }
+        );
 
       mkHost =
         {
@@ -86,6 +103,18 @@
         }
       ) hosts;
 
-      formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt-tree;
+      formatter = forEachSupportedSystem ({ pkgs, ... }: pkgs.nixfmt);
+
+      devShells = forEachSupportedSystem (
+        { pkgs, system }:
+        {
+          default = pkgs.mkShell {
+            packages = with pkgs; [
+              nil
+              self.formatter.${system}
+            ];
+          };
+        }
+      );
     };
 }
