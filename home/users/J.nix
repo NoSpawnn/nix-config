@@ -25,10 +25,8 @@
     zoxide
     direnv
     lazygit
-    yazi
-    helix
     tealdeer
-    zellij
+	neovim
   ];
 
   home.sessionVariables = {
