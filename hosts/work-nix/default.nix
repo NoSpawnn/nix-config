@@ -5,7 +5,7 @@
 
 {
   imports = [
-    ../../profiles/laptop.nix
+    ../../profiles/headless.nix
     ./hardware-configuration.nix
   ];
 
@@ -36,10 +36,6 @@
 
   hardware.bluetooth.enable = true;
   virtualisation.hypervGuest.enable = true;
-  hardware.graphics = {
-    enable = true;
-    enable32Bit = true;
-  };
 
   system.stateVersion = "25.11";
 }
