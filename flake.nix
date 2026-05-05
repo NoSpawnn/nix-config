@@ -102,6 +102,24 @@
             ];
           }
         );
+
+        work-nix = lib.nixosSystem (
+          nixosSystemDefaultOpts
+          // {
+            modules = [
+              ./hosts/work-nix
+              hm
+              (
+                hmDefaultOpts
+                // {
+                  home-manager.users = {
+                    J = import ./home/users/J.nix;
+                  };
+                }
+              )
+            ];
+          }
+        );
       };
 
       formatter = forEachSupportedSystem ({ pkgs, ... }: pkgs.nixfmt);
