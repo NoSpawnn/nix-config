@@ -8,13 +8,7 @@
 {
   imports = [
     ../modules/wayland.nix
-    ../modules/chezmoi.nix
   ];
-
-  modules.chezmoi = {
-    dotfilesRepoUrl = "https://git.nospawnn.com/red/dotfiles";
-    forceApply = true;
-  };
 
   home.username = "J";
   home.homeDirectory = "/home/J";
@@ -26,11 +20,11 @@
     direnv
     lazygit
     tealdeer
-	neovim
+    neovim
   ];
 
   home.sessionVariables = {
-    "EDITOR" = "hx";
+    "EDITOR" = "nvim";
   };
 
   programs.home-manager.enable = true;
