@@ -29,7 +29,6 @@
     vim
     git
     fzf
-    corefonts # ms-corefonts
     zip
     unzip
     polkit

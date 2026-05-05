@@ -25,6 +25,7 @@ in
     [
       tor-browser
       blueman
+      corefonts # ms-corefonts
     ]
     ++ [ zen-browser ];
 
