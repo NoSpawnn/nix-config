@@ -14,7 +14,7 @@
   services.openssh.enable = true;
 
   boot = {
-    kernelPackages = pkgs.linuxPackages_6_18;
+    kernelPackages = pkgs.linuxPackages_latest;
     loader = {
       efi = {
         canTouchEfiVariables = true;
