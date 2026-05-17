@@ -1,5 +1,3 @@
-# currently just installation of niri and supporting packages, configuration is not handled in Nix (yet?)
-
 {
   flake-inputs,
   pkgs,
@@ -13,7 +11,10 @@ let
   };
 in
 {
-  imports = [ ./ly.nix ];
+  imports = [
+    ./wayland.nix
+    ./ly.nix
+  ];
 
   programs.niri.enable = true;
   environment.systemPackages =
@@ -39,9 +40,6 @@ in
       brightnessctl
       gpu-screen-recorder
       pavucontrol
-
-      # for config
-      kdlfmt
     ]
     ++ (builtins.attrValues extraPkgs);
 

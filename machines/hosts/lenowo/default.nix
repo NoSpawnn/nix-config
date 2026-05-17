@@ -11,7 +11,7 @@
 
   networking.hostName = "lenowo";
 
-  modules.tailscale.enable = true;
+  services.tailscale.enable = true;
 
   boot = {
     kernelPackages = pkgs.linuxPackages_latest;

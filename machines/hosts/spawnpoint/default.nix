@@ -24,8 +24,9 @@
     };
   };
 
+  services.tailscale.enable = true;
+
   modules = {
-    tailscale.enable = true;
     gaming = {
       enable = true;
       vr.enable = true;

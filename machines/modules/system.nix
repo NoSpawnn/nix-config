@@ -5,18 +5,7 @@
 
 {
   imports = [
-    ./tailscale.nix
-  ];
-
-  nix.gc = {
-    automatic = true;
-    dates = "weekly";
-    options = "--delete-older-than 7d";
-  };
-
-  nix.settings.experimental-features = [
-    "nix-command"
-    "flakes"
+    ./nixos.nix
   ];
 
   time.timeZone = "Europe/London";
@@ -24,7 +13,7 @@
 
   networking.networkmanager.enable = true;
 
-  nixpkgs.config.allowUnfree = true;
+  # TODO: move these someplace better
   environment.systemPackages = with pkgs; [
     vim
     git

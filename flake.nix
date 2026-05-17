@@ -17,9 +17,9 @@
     niri-scratchpad.url = "github:gvolpe/niri-scratchpad";
     niri-scratchpad.inputs.nixpkgs.follows = "nixpkgs";
 
-    zen-browser.url = "github:0xc000022070/zen-browser-flake";
-    zen-browser.inputs.nixpkgs.follows = "nixpkgs";
-    zen-browser.inputs.home-manager.follows = "home-manager";
+    # zen-browser.url = "github:0xc000022070/zen-browser-flake";
+    # zen-browser.inputs.nixpkgs.follows = "nixpkgs";
+    # zen-browser.inputs.home-manager.follows = "home-manager";
   };
 
   outputs =
@@ -33,13 +33,15 @@
       inherit (nixpkgs) lib;
 
       userPresets = {
+        # Regular user
         N = {
-          home = import ./modules/home/users/N/home.nix;
-          system = import ./modules/home/users/N/system.nix;
+          home = import ./homes/users/N/home.nix;
+          system = import ./homes/users/N/system.nix;
         };
+        # Work user
         J = {
-          home = import ./modules/home/users/J/home.nix;
-          system = import ./modules/home/users/J/system.nix;
+          home = import ./homes/users/J/home.nix;
+          system = import ./homes/users/J/system.nix;
         };
       };
 
@@ -92,14 +94,14 @@
         spawnpoint = mkNixosSystem {
           users = { inherit (userPresets) N; };
           extraModules = [
-            ./modules/hosts/spawnpoint
+            ./machines/hosts/spawnpoint
           ];
         };
 
         lenowo = mkNixosSystem {
           users = { inherit (userPresets) N; };
           extraModules = [
-            ./modules/hosts/lenowo
+            ./machines/hosts/lenowo
           ];
         };
 
