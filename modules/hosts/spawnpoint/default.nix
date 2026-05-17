@@ -32,17 +32,6 @@
     };
   };
 
-  users.users.N = {
-    isNormalUser = true;
-    extraGroups = [
-      "networkmanager"
-      "wheel"
-      "dialout"
-      "docker"
-      "incus-admin"
-    ];
-  };
-
   hardware.bluetooth.enable = true;
 
   services.lact.enable = true;

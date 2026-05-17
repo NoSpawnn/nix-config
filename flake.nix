@@ -32,6 +32,17 @@
     let
       inherit (nixpkgs) lib;
 
+      userPresets = {
+        N = {
+          home = import ./modules/home/users/N/home.nix;
+          system = import ./modules/home/users/N/system.nix;
+        };
+        J = {
+          home = import ./modules/home/users/J/home.nix;
+          system = import ./modules/home/users/J/system.nix;
+        };
+      };
+
       mkNixosSystem =
         {
           users ? { },
@@ -41,7 +52,6 @@
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.extraSpecialArgs.flake-inputs = inputs;
-              home-manager.users = users;
             }
           ],
           extraModules ? [ ],
@@ -50,7 +60,15 @@
         lib.nixosSystem {
           inherit system;
           specialArgs.flake-inputs = inputs;
-          modules = baseModules ++ extraModules;
+          modules =
+            baseModules
+            ++ extraModules
+            ++ [
+              {
+                users.users = builtins.mapAttrs (_: u: u.system) users;
+                home-manager.users = builtins.mapAttrs (_: u: u.home) users;
+              }
+            ];
         };
 
       forEachSupportedSystem =
@@ -72,23 +90,23 @@
     {
       nixosConfigurations = {
         spawnpoint = mkNixosSystem {
-          users.N = import ./home/users/N.nix;
+          users = { inherit (userPresets) N; };
           extraModules = [
-            ./hosts/spawnpoint
+            ./modules/hosts/spawnpoint
           ];
         };
 
         lenowo = mkNixosSystem {
-          users.N = import ./home/users/N.nix;
+          users = { inherit (userPresets) N; };
           extraModules = [
-            ./hosts/lenowo
+            ./modules/hosts/lenowo
           ];
         };
 
         work-nix = mkNixosSystem {
-          users.J = import ./home/users/J.nix;
+          users = { inherit (userPresets) J; };
           extraModules = [
-            ./hosts/work-nix
+            ./modules/hosts/work-nix
           ];
         };
       };

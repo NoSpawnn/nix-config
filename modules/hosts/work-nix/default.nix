@@ -5,13 +5,11 @@
 
 {
   imports = [
-    ../../profiles/laptop.nix
+    ../../profiles/headless.nix
     ./hardware-configuration.nix
   ];
 
-  networking.hostName = "lenowo";
-
-  modules.tailscale.enable = true;
+  networking.hostName = "work-nix";
 
   boot = {
     kernelPackages = pkgs.linuxPackages_latest;
@@ -23,23 +21,10 @@
     };
   };
 
-  users.users = {
-    N = {
-      isNormalUser = true;
-      extraGroups = [
-        "networkmanager"
-        "wheel"
-        "docker"
-      ];
-    };
-  };
+  services.openssh.enable = true;
 
   hardware.bluetooth.enable = true;
-
-  hardware.graphics = {
-    enable = true;
-    enable32Bit = true;
-  };
+  virtualisation.hypervGuest.enable = true;
 
   system.stateVersion = "25.11";
 }

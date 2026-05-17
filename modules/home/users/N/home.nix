@@ -1,13 +1,7 @@
-# regular user
-
-{
-  pkgs,
-  ...
-}:
-
+{ pkgs, ... }:
 {
   imports = [
-    ../modules/wayland.nix
+    ../../modules/wayland.nix
   ];
 
   home.username = "N";
