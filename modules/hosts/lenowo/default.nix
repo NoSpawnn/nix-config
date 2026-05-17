@@ -23,17 +23,6 @@
     };
   };
 
-  # users.users = {
-  #   N = {
-  #     isNormalUser = true;
-  #     extraGroups = [
-  #       "networkmanager"
-  #       "wheel"
-  #       "docker"
-  #     ];
-  #   };
-  # };
-
   hardware.bluetooth.enable = true;
 
   hardware.graphics = {
