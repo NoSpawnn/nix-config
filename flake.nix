@@ -3,7 +3,9 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+
     nix-gaming.url = "github:fufexan/nix-gaming/4199abcbc86b52e6878d1021da61c4e8e308e00e";
+
     nix-flatpak.url = "github:gmodena/nix-flatpak/latest";
 
     home-manager.url = "github:nix-community/home-manager";
@@ -30,16 +32,26 @@
     let
       inherit (nixpkgs) lib;
 
-      hm = home-manager.nixosModules.home-manager;
-      hmDefaultOpts = {
-        home-manager.useGlobalPkgs = true;
-        home-manager.useUserPackages = true;
-        home-manager.extraSpecialArgs.flake-inputs = inputs;
-      };
-
-      nixosSystemDefaultOpts = {
-        specialArgs.flake-inputs = inputs;
-      };
+      mkNixosSystem =
+        {
+          users ? { },
+          baseModules ? [
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.extraSpecialArgs.flake-inputs = inputs;
+              home-manager.users = users;
+            }
+          ],
+          extraModules ? [ ],
+          system ? "x86_64-linux",
+        }:
+        lib.nixosSystem {
+          inherit system;
+          specialArgs.flake-inputs = inputs;
+          modules = baseModules ++ extraModules;
+        };
 
       forEachSupportedSystem =
         f:
@@ -59,59 +71,26 @@
     in
     {
       nixosConfigurations = {
-        spawnpoint = lib.nixosSystem (
-          nixosSystemDefaultOpts
-          // {
-            modules = [
-              ./hosts/spawnpoint
-              hm
-              (
-                hmDefaultOpts
-                // {
-                  home-manager.users = {
-                    N = import ./home/users/N.nix;
-                  };
-                }
-              )
-            ];
-          }
-        );
+        spawnpoint = mkNixosSystem {
+          users.N = import ./home/users/N.nix;
+          extraModules = [
+            ./hosts/spawnpoint
+          ];
+        };
 
-        lenowo = lib.nixosSystem (
-          nixosSystemDefaultOpts
-          // {
-            modules = [
-              ./hosts/lenowo
-              hm
-              (
-                hmDefaultOpts
-                // {
-                  home-manager.users = {
-                    N = import ./home/users/N.nix;
-                  };
-                }
-              )
-            ];
-          }
-        );
+        lenowo = mkNixosSystem {
+          users.N = import ./home/users/N.nix;
+          extraModules = [
+            ./hosts/lenowo
+          ];
+        };
 
-        work-nix = lib.nixosSystem (
-          nixosSystemDefaultOpts
-          // {
-            modules = [
-              ./hosts/work-nix
-              hm
-              (
-                hmDefaultOpts
-                // {
-                  home-manager.users = {
-                    J = import ./home/users/J.nix;
-                  };
-                }
-              )
-            ];
-          }
-        );
+        work-nix = mkNixosSystem {
+          users.J = import ./home/users/J.nix;
+          extraModules = [
+            ./hosts/work-nix
+          ];
+        };
       };
 
       formatter = forEachSupportedSystem ({ pkgs, ... }: pkgs.nixfmt);
