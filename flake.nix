@@ -37,13 +37,13 @@
       userPresets = {
         # Regular user
         N = {
-          home = import ./homes/users/N/home.nix;
-          system = import ./homes/users/N/system.nix;
+          home = import ./users/accounts/N/home.nix;
+          system = import ./users/accounts/N/system.nix;
         };
         # Work user
         J = {
-          home = import ./homes/users/J/home.nix;
-          system = import ./homes/users/J/system.nix;
+          home = import ./users/accounts/J/home.nix;
+          system = import ./users/accounts/J/system.nix;
         };
       };
 
