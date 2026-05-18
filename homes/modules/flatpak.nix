@@ -4,6 +4,7 @@
   imports = [ flake-inputs.nix-flatpak.homeManagerModules.nix-flatpak ];
 
   services.flatpak = {
+    defaultRemote = "flathub-user";
     uninstallUnmanaged = true;
     remotes = [
       {
