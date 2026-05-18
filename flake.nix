@@ -110,7 +110,7 @@
         work-nix = mkNixosSystem {
           users = { inherit (userPresets) J; };
           extraModules = [
-            ./modules/hosts/work-nix
+            ./machines/hosts/work-nix
           ];
         };
       };
