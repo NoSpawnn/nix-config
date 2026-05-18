@@ -1,25 +1,18 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
-  home.shell.enableBashIntegration = true;
-
-  programs = {
-    direnv.enable = true;
-    eza.enable = true;
-    fastfetch.enable = true;
-    lazygit.enable = true;
-    starship.enable = true;
-    tealdeer.enable = true;
-    tmux.enable = true;
-    zoxide.enable = true;
-
-    neovim = {
-      enable = true;
-      sideloadInitLua = true;
-      withRuby = false;
-      withPython3 = false;
-    };
-  };
+  # I manage all my configs outside of nix, so don't use programs.*
+  home.packages = with pkgs; [
+    tmux
+    lazygit
+    direnv
+    eza
+    fastfetch
+    starship
+    tealdeer
+    zoxide
+    neovim
+  ];
 
   programs.home-manager.enable = true;
 }
