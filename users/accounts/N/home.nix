@@ -11,6 +11,7 @@
     "com.orcaslicer.OrcaSlicer"
     "com.rtosta.zapzap"
     "dev.vencord.Vesktop"
+    "org.signal.Signal"
   ];
 
   home.username = "N";
