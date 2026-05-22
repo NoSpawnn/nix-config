@@ -12,6 +12,7 @@
     "com.rtosta.zapzap"
     "dev.vencord.Vesktop"
     "org.signal.Signal"
+    "org.mozilla.Thunderbird"
   ];
 
   home.username = "N";
