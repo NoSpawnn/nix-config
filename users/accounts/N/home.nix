@@ -21,6 +21,7 @@
   home.packages = with pkgs; [
     quickemu
     obs-studio
+    btop
   ];
 
   home.sessionVariables = {
