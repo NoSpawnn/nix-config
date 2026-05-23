@@ -13,13 +13,13 @@
     "dev.vencord.Vesktop"
     "org.signal.Signal"
     "org.mozilla.Thunderbird"
+    "org.godotengine.Godot"
   ];
 
   home.username = "N";
   home.homeDirectory = "/home/N";
   home.packages = with pkgs; [
     quickemu
-    godot
     obs-studio
   ];
 
