@@ -10,7 +10,7 @@
     #nix-flatpak.url = "path:/home/N/Documents/nix-flatpak"; # dev
     nix-flatpak.url = "github:NoSpawnn/nix-flatpak"; # temp fork for `defaultRemote` opt
 
-    home-manager.url = "github:nix-community/home-manager";
+    home-manager.url = "github:nix-community/home-manager/release-26.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     noctalia.url = "github:noctalia-dev/noctalia-shell";
@@ -19,9 +19,9 @@
     niri-scratchpad.url = "github:gvolpe/niri-scratchpad";
     niri-scratchpad.inputs.nixpkgs.follows = "nixpkgs";
 
-    # zen-browser.url = "github:0xc000022070/zen-browser-flake";
-    # zen-browser.inputs.nixpkgs.follows = "nixpkgs";
-    # zen-browser.inputs.home-manager.follows = "home-manager";
+    #quadmanix.url = "path:/home/N/Documents/dev/quadmanix";
+    quadmanix.url = "github:NoSpawnn/quadmanix";
+    quadmanix.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
