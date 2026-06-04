@@ -84,11 +84,11 @@
     },
     "nix-flatpak": {
       "locked": {
-        "lastModified": 1779043800,
-        "narHash": "sha256-Lno9BD9iy4OrqapAcuipyQXKmLG7gwVk0o7GmIuE/Tw=",
+        "lastModified": 1780605089,
+        "narHash": "sha256-/lQBflwJoS+6mjyNr3nwa7iR/debOQvr1L8amDiTwoc=",
         "owner": "NoSpawnn",
         "repo": "nix-flatpak",
-        "rev": "51a53172da60f8512d0800455059aed242cc2f40",
+        "rev": "9301b80a4c419beffecd4ddbf91a6dc19ad6ac98",
         "type": "github"
       },
       "original": {
