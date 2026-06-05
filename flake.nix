@@ -6,9 +6,7 @@
 
     nix-gaming.url = "github:fufexan/nix-gaming/4199abcbc86b52e6878d1021da61c4e8e308e00e";
 
-    #nix-flatpak.url = "github:gmodena/nix-flatpak/latest"; # main
-    #nix-flatpak.url = "path:/home/N/Documents/nix-flatpak"; # dev
-    nix-flatpak.url = "github:NoSpawnn/nix-flatpak"; # temp fork for `defaultRemote` opt
+    nix-flatpak.url = "github:gmodena/nix-flatpak/main"; # main
 
     home-manager.url = "github:nix-community/home-manager/release-26.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
