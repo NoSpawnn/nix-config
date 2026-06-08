@@ -14,6 +14,7 @@
     "org.signal.Signal"
     "org.mozilla.Thunderbird"
     "org.godotengine.Godot"
+    "md.obsidian.Obsidian"
   ];
 
   home.username = "N";
