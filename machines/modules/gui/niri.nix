@@ -21,7 +21,7 @@ in
     with pkgs;
     [
       # core for niri
-      alacritty
+      ghostty
       fuzzel
       nautilus
       xdg-desktop-portal
