@@ -5,7 +5,7 @@
   env.GREET = "devenv";
 
   # https://devenv.sh/packages/
-  packages = [ pkgs.git pkgs.nil pkgs.nixd ];
+  packages = with pkgs; [ git nil nixd nixfmt ];
 
   # https://devenv.sh/languages/
   # languages.rust.enable = true;
