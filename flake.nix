@@ -114,17 +114,5 @@
       };
 
       formatter = forEachSupportedSystem ({ pkgs, ... }: pkgs.nixfmt);
-      devShells = forEachSupportedSystem (
-        { pkgs, system }:
-        {
-          default = pkgs.mkShell {
-            packages = with pkgs; [
-              nil
-              nixd
-              self.formatter.${system}
-            ];
-          };
-        }
-      );
     };
 }

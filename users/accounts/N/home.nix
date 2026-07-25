@@ -20,6 +20,7 @@
   home.username = "N";
   home.homeDirectory = "/home/N";
   home.packages = with pkgs; [
+    devenv
     quickemu
     obs-studio
     btop

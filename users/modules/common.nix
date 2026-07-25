@@ -6,7 +6,6 @@
     tmux
     just
     lazygit
-    direnv
     eza
     fastfetch
     starship
