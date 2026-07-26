@@ -2,6 +2,8 @@
 {
   flake.nixosConfigurations.spawnpoint = inputs.nixpkgs.lib.nixosSystem {
     modules = with self.nixosModules; [
+      userN
+
       amdDrivers
       desktop
       gaming
@@ -10,17 +12,6 @@
       ({ ... }: {
         networking.hostName = "spawnpoint";
         networking.interfaces."enp11s0".wakeOnLan.enable = true;
-
-        home-manager.users.N = self.homeModules.userN;
-        users.users.N = {
-          isNormalUser = true;
-          extraGroups = [
-            "networkmanager"
-            "dialout"
-            "wheel"
-            "docker"
-          ];
-        };
       })
     ] ++ [ ./_hardware-configuration.nix ];
   };

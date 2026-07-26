@@ -1,9 +1,28 @@
 { self, ... }:
+let
+    username = "N";
+in
 {
+  flake.nixosModules.userN = { pkgs, ... }: {
+    home-manager.users.N = self.homeModules.userN;
+    users.users.N = {
+      isNormalUser = true;
+      shell = pkgs.zsh;
+      ignoreShellProgramCheck = true;
+      extraGroups = [
+        "networkmanager"
+        "dialout"
+        "wheel"
+        "docker"
+      ];
+    };
+  };
+
   flake.homeModules.userN = { pkgs, ... }: {
     imports = with self.homeModules; [
       hmCore
       flatpak
+      zsh
     ];
 
     home.username = "N";
@@ -31,7 +50,7 @@
 
     home.sessionVariables = {
       "EDITOR" = "nvim";
-    };
+     };
 
     home.stateVersion = "25.11";
 
