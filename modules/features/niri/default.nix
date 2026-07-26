@@ -9,7 +9,10 @@
       };
     in
     {
-      imports = [ self.nixosModules.ly ];
+      imports = with self.nixosModules; [
+        ly
+        kitty
+      ];
 
       programs.niri.enable = true;
       environment.systemPackages =
