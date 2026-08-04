@@ -5,10 +5,11 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     nix-gaming.url = "github:fufexan/nix-gaming";
+    nix-gaming.inputs.nixpkgs.follows = "nixpkgs";
 
     nix-flatpak.url = "github:gmodena/nix-flatpak";
 
-    home-manager.url = "github:nix-community/home-manager/release-26.05";
+    home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     noctalia.url = "github:noctalia-dev/noctalia-shell";
@@ -20,104 +21,18 @@
     quadmanix.url = "github:NoSpawnn/quadmanix";
     quadmanix.inputs.nixpkgs.follows = "nixpkgs";
 
-    # for dendritic pattern
+    otter-launcher.url = "github:kuokuo123/otter-launcher";
+    otter-launcher.inputs.nixpkgs.follows = "nixpkgs";
+
+    self.submodules = true;
+    dotfiles.url = "path:dotfiles";
+    dotfiles.flake = false;
+
     import-tree.url = "github:denful/import-tree";
     flake-parts.url = "github:hercules-ci/flake-parts";
   };
 
-  outputs = inputs@{ flake-parts, import-tree, ... }: flake-parts.lib.mkFlake { inherit inputs; } (import-tree ./modules);
-
-  # outputs =
-  #   {
-  #     self,
-  #     nixpkgs,
-  #     home-manager,
-  #     ...
-  #   }@inputs:
-  #   let
-  #     inherit (nixpkgs) lib;
-  #
-  #     userPresets = {
-  #       # Regular user
-  #       N = {
-  #         home = import ./users/accounts/N/home.nix;
-  #         system = import ./users/accounts/N/system.nix;
-  #       };
-  #       # Work user
-  #       J = {
-  #         home = import ./users/accounts/J/home.nix;
-  #         system = import ./users/accounts/J/system.nix;
-  #       };
-  #     };
-  #
-  #     mkNixosSystem =
-  #       {
-  #         users ? { },
-  #         baseModules ? [
-  #           home-manager.nixosModules.home-manager
-  #           {
-  #             home-manager.useGlobalPkgs = true;
-  #             home-manager.useUserPackages = true;
-  #             home-manager.extraSpecialArgs.flake-inputs = inputs;
-  #           }
-  #         ],
-  #         extraModules ? [ ],
-  #         system ? "x86_64-linux",
-  #       }:
-  #       lib.nixosSystem {
-  #         inherit system;
-  #         specialArgs.flake-inputs = inputs;
-  #         modules =
-  #           baseModules
-  #           ++ extraModules
-  #           ++ [
-  #             {
-  #               users.users = builtins.mapAttrs (_: u: u.system) users;
-  #               home-manager.users = builtins.mapAttrs (_: u: u.home) users;
-  #             }
-  #           ];
-  #       };
-  #
-  #     forEachSupportedSystem =
-  #       f:
-  #       lib.genAttrs
-  #         [
-  #           "x86_64-linux"
-  #           "aarch64-linux"
-  #           "aarch64-darwin"
-  #         ]
-  #         (
-  #           system:
-  #           f {
-  #             inherit system;
-  #             pkgs = import nixpkgs { inherit system; };
-  #           }
-  #         );
-  #   in
-  #   {
-  #     nixosConfigurations = {
-  #       spawnpoint = mkNixosSystem {
-  #         users = { inherit (userPresets) N; };
-  #         extraModules = [
-  #           ./machines/hosts/spawnpoint
-  #         ];
-  #       };
-  #
-  #       lenowo = mkNixosSystem {
-  #         users = { inherit (userPresets) N; };
-  #         extraModules = [
-  #           ./machines/hosts/lenowo
-  #         ];
-  #       };
-  #
-  #       work-nix = mkNixosSystem {
-  #         users = { inherit (userPresets) J; };
-  #         extraModules = [
-  #           ./machines/hosts/work-nix
-  #         ];
-  #       };
-  #     };
-  #
-  #     formatter = forEachSupportedSystem ({ pkgs, ... }: pkgs.nixfmt);
-  #   };
+  outputs =
+    inputs@{ flake-parts, import-tree, ... }:
+    flake-parts.lib.mkFlake { inherit inputs; } (import-tree ./modules);
 }

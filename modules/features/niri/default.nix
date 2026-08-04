@@ -1,6 +1,12 @@
-{ inputs, self, ... }:
 {
-  flake.nixosModules.niri =
+  moduleWithSystem,
+  inputs,
+  self,
+  ...
+}:
+
+{
+  flake.nixosModules.niri = moduleWithSystem (
     { pkgs, ... }:
     let
       extraPkgs = with inputs; {
@@ -12,16 +18,15 @@
       imports = with self.nixosModules; [
         ly
         kitty
+        otter-launcher
+        nemo
+        wpaperd
       ];
 
       programs.niri.enable = true;
       environment.systemPackages =
         with pkgs;
         [
-          # core for niri
-          ghostty
-          fuzzel
-          nautilus
           # TODO: switch to kde portals or something else
           xdg-desktop-portal
           xdg-desktop-portal-gnome
@@ -30,7 +35,6 @@
           polkit
           polkit_gnome
           xwayland-satellite
-          swaybg
           swaylock
 
           # additional stuff
@@ -68,5 +72,6 @@
           TimeoutStopSec = 10;
         };
       };
-    };
+    }
+  );
 }

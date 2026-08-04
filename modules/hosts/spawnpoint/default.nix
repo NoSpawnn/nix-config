@@ -7,7 +7,6 @@
       amdDrivers
       desktop
       gaming
-      # spawnpoint-hardware
 
       ({ ... }: {
         networking.hostName = "spawnpoint";
