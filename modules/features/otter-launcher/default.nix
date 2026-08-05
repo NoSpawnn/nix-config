@@ -14,6 +14,7 @@
     packages.otter-launcher = inputs.wrappers.lib.wrapPackage {
       inherit pkgs;
       package = inputs'.otter-launcher.packages.default;
+      runtimePkgs = [ pkgs.fsel ];
       flags."--config" = "${dotfiles}/dots/dot-config/otter-launcher/config.toml";
     };
   };
