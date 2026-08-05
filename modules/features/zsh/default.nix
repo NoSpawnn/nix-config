@@ -24,10 +24,11 @@
       }
     );
 
-  perSystem = { pkgs, ... }: {
+  perSystem = { pkgs, self', ... }: {
     packages.zsh = inputs.wrappers.wrappers.zsh.wrap {
       inherit pkgs;
       runtimePkgs = with pkgs; [
+        self'.packages.nvim
         starship
         fzf
       ];
