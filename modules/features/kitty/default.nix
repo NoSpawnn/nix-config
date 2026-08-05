@@ -1,7 +1,7 @@
 {
   moduleWithSystem,
   dotfiles,
-  mylib,
+  inputs,
   ...
 }:
 
@@ -18,10 +18,13 @@
       font = pkgs.nerd-fonts._0xproto;
     in
     {
-      packages.kitty = mylib.wrapProgram pkgs.kitty {
-        inherit pkgs;
-        flags."--config" = "${dotfiles}/dots/dot-config/kitty/kitty.conf";
-        extraPrefix."XDG_DATA_DIRS" = "${font}/share";
-      };
+      packages.kitty = inputs.wrappers.lib.wrapPackage (
+        { ... }: {
+          inherit pkgs;
+          package = pkgs.kitty;
+          flags."--config" = "${dotfiles}/dots/dot-config/kitty/kitty.conf";
+          env."XDG_DATA_DIRS" = "${font}/share";
+        }
+      );
     };
 }

@@ -1,7 +1,7 @@
 {
   moduleWithSystem,
-  mylib,
   dotfiles,
+  inputs,
   ...
 }:
 {
@@ -11,11 +11,21 @@
     }
   );
 
-  perSystem = { pkgs, ... }: {
-    packages.wpaperd = mylib.wrapProgram pkgs.wpaperd {
-      inherit pkgs;
-      flags."--config" = "${dotfiles}/dots/dot-config/wpaperd/config.toml";
-      chdir = "${dotfiles}/dots/dot-config/wpaperd"; # cd here so that the config file can use relative paths
+  perSystem =
+    { pkgs, ... }:
+    let
+      config = builtins.toFile "config.toml" ''
+        [any]
+        path = "${dotfiles}/wallpapers/rainy-moon.png"
+      '';
+    in
+    {
+      packages.wpaperd = inputs.wrappers.lib.wrapPackage (
+        { ... }: {
+          inherit pkgs;
+          package = pkgs.wpaperd;
+          flags."--config" = config;
+        }
+      );
     };
-  };
 }

@@ -1,19 +1,46 @@
 {
   moduleWithSystem,
   inputs,
+  dotfiles,
   self,
   ...
 }:
 
 {
-  flake.nixosModules.niri = moduleWithSystem (
-    { pkgs, ... }:
-    let
-      extraPkgs = with inputs; {
-        noctalia-shell = noctalia.packages.${pkgs.system}.default;
-        niri-scratchpad = niri-scratchpad.packages.${pkgs.system}.niri-scratchpad;
+  perSystem =
+    { system, pkgs, ... }:
+    {
+      packages.niri = inputs.wrappers.wrappers.niri.wrap {
+        config = {
+          inherit pkgs;
+
+          "config.kdl".path = "${dotfiles}/dots/dot-config/niri/config.kdl";
+
+          runtimePkgs =
+            with pkgs;
+            [
+              brightnessctl
+              gnome-keyring
+              polkit
+              polkit_gnome
+              swayidle
+              swaylock
+              wlsunset
+              xdg-desktop-portal
+              xdg-desktop-portal-gnome
+              xdg-desktop-portal-gtk
+              xwayland-satellite
+            ]
+            ++ [
+              inputs.noctalia.packages.${system}.default
+              inputs.niri-scratchpad.packages.${system}.default
+            ];
+        };
       };
-    in
+    };
+
+  flake.nixosModules.niri = moduleWithSystem (
+    { self', pkgs, ... }:
     {
       imports = with self.nixosModules; [
         ly
@@ -23,29 +50,14 @@
         wpaperd
       ];
 
-      programs.niri.enable = true;
-      environment.systemPackages =
-        with pkgs;
-        [
-          # TODO: switch to kde portals or something else
-          xdg-desktop-portal
-          xdg-desktop-portal-gnome
-          xdg-desktop-portal-gtk
-          gnome-keyring
-          polkit
-          polkit_gnome
-          xwayland-satellite
-          swaylock
+      programs.niri = {
+        enable = true;
+        package = self'.packages.niri;
+      };
 
-          # additional stuff
-          quickshell
-          wlsunset
-          brightnessctl
-          gpu-screen-recorder
-          pavucontrol
-          wl-clipboard
-        ]
-        ++ (builtins.attrValues extraPkgs);
+      environment.systemPackages = with pkgs; [
+        wl-clipboard
+      ];
 
       environment.sessionVariables = {
         "NIXOS_OZONE_WL" = "1"; # for any ozone-based browser & electron apps to run on wayland

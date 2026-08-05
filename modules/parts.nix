@@ -1,6 +1,5 @@
 {
   inputs,
-  lib,
   ...
 }:
 {
@@ -8,7 +7,6 @@
 
   config._module.args = {
     dotfiles = inputs.dotfiles;
-    mylib = import ./_mylib.nix { inherit lib; };
   };
 
   config.systems = [

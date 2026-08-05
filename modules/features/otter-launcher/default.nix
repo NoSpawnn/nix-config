@@ -1,7 +1,7 @@
 {
   moduleWithSystem,
   dotfiles,
-  mylib,
+  inputs,
   ...
 }:
 
@@ -13,8 +13,9 @@
   );
 
   perSystem = { inputs', pkgs, ... }: {
-    packages.otter-launcher = mylib.wrapProgram inputs'.otter-launcher.packages.default {
+    packages.otter-launcher = inputs.wrappers.lib.wrapPackage {
       inherit pkgs;
+      package = inputs'.otter-launcher.packages.default;
       flags."--config" = "${dotfiles}/dots/dot-config/otter-launcher/config.toml";
     };
   };
