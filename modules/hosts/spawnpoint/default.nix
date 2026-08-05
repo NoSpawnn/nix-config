@@ -1,17 +1,19 @@
-{ self, inputs, ... }:
-{
+{ self, inputs, ... }: {
   flake.nixosConfigurations.spawnpoint = inputs.nixpkgs.lib.nixosSystem {
-    modules = with self.nixosModules; [
-      userN
+    modules =
+      with self.nixosModules;
+      [
+        userN
 
-      amdDrivers
-      desktop
-      gaming
+        amdDrivers
+        desktop
+        gaming
 
-      ({ ... }: {
-        networking.hostName = "spawnpoint";
-        networking.interfaces."enp11s0".wakeOnLan.enable = true;
-      })
-    ] ++ [ ./_hardware-configuration.nix ];
+        ({ ... }: {
+          networking.hostName = "spawnpoint";
+          networking.interfaces."enp11s0".wakeOnLan.enable = true;
+        })
+      ]
+      ++ [ ./_hardware-configuration.nix ];
   };
 }

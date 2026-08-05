@@ -1,5 +1,4 @@
-{ ... }:
-{
+{ ... }: {
   flake.nixosModules.nix = { ... }: {
     nix.gc = {
       automatic = true;

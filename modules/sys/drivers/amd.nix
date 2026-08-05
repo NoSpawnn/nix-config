@@ -1,6 +1,5 @@
 # yoink https://git.voidarc.co.uk/voidarc/nixos/src/branch/dendritic/modules/system/drivers/amd.nix
-{ ... }:
-{
+{ ... }: {
   flake.nixosModules.amdDrivers = { pkgs, lib, ... }: {
     environment.systemPackages = with pkgs; [
       mesa
@@ -28,13 +27,9 @@
       };
     };
 
-    boot.kernelParams = [
-      "amdgpu.ppfeaturemask=0xffffffff"
-    ];
+    boot.kernelParams = [ "amdgpu.ppfeaturemask=0xffffffff" ];
 
     # For rOCM
-    systemd.tmpfiles.rules = [
-      "L+ /opt/rocm - - - - ${pkgs.rocmPackages.clr}"
-    ];
+    systemd.tmpfiles.rules = [ "L+ /opt/rocm - - - - ${pkgs.rocmPackages.clr}" ];
   };
 }

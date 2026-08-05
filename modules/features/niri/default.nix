@@ -7,41 +7,38 @@
 }:
 
 {
-  perSystem =
-    { system, pkgs, ... }:
-    {
-      packages.niri = inputs.wrappers.wrappers.niri.wrap {
-        config = {
-          inherit pkgs;
+  perSystem = { system, pkgs, ... }: {
+    packages.niri = inputs.wrappers.wrappers.niri.wrap {
+      config = {
+        inherit pkgs;
 
-          "config.kdl".content = builtins.readFile "${dotfiles}/dots/dot-config/niri/config.kdl";
+        "config.kdl".content = builtins.readFile "${dotfiles}/dots/dot-config/niri/config.kdl";
 
-          runtimePkgs =
-            with pkgs;
-            [
-              brightnessctl
-              gnome-keyring
-              polkit
-              polkit_gnome
-              swayidle
-              swaylock
-              wlsunset
-              xdg-desktop-portal
-              xdg-desktop-portal-gnome
-              xdg-desktop-portal-gtk
-              xwayland-satellite
-            ]
-            ++ [
-              inputs.noctalia.packages.${system}.default
-              inputs.niri-scratchpad.packages.${system}.default
-            ];
-        };
+        runtimePkgs =
+          with pkgs;
+          [
+            brightnessctl
+            gnome-keyring
+            polkit
+            polkit_gnome
+            swayidle
+            swaylock
+            wlsunset
+            xdg-desktop-portal
+            xdg-desktop-portal-gnome
+            xdg-desktop-portal-gtk
+            xwayland-satellite
+          ]
+          ++ [
+            inputs.noctalia.packages.${system}.default
+            inputs.niri-scratchpad.packages.${system}.default
+          ];
       };
     };
+  };
 
   flake.nixosModules.niri = moduleWithSystem (
-    { self', pkgs, ... }:
-    {
+    { self', pkgs, ... }: {
       imports = with self.nixosModules; [
         ly
         kitty
@@ -55,9 +52,7 @@
         package = self'.packages.niri;
       };
 
-      environment.systemPackages = with pkgs; [
-        wl-clipboard
-      ];
+      environment.systemPackages = with pkgs; [ wl-clipboard ];
 
       environment.sessionVariables = {
         "NIXOS_OZONE_WL" = "1"; # for any ozone-based browser & electron apps to run on wayland

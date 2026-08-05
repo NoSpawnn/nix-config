@@ -1,17 +1,10 @@
-{
-  moduleWithSystem,
-  ...
-}:
+{ moduleWithSystem, ... }:
 
 {
   flake.nixosModules.nemo = moduleWithSystem (
-    { self', ... }: {
-      environment.systemPackages = [ self'.packages.nemo ];
-    }
+    { self', ... }: { environment.systemPackages = [ self'.packages.nemo ]; }
   );
 
-  perSystem = { pkgs, ... }: {
-    packages.nemo = pkgs.nemo;
-  };
+  perSystem = { pkgs, ... }: { packages.nemo = pkgs.nemo; };
 
 }

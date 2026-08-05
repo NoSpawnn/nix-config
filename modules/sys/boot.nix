@@ -1,5 +1,4 @@
-{ ... }:
-{
+{ ... }: {
   flake.nixosModules.bootloader = { pkgs, ... }: {
     boot.kernelPackages = pkgs.linuxPackages_latest;
     boot.loader = {

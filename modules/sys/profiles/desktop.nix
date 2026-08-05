@@ -1,5 +1,4 @@
-{ self, ... }:
-{
+{ self, ... }: {
   flake.nixosModules.desktop = { pkgs, ... }: {
     imports = with self.nixosModules; [
       sysCore

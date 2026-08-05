@@ -1,5 +1,4 @@
-{ self, ... }:
-{
+{ self, ... }: {
   flake.nixosModules.sysCore = { ... }: {
     imports = with self.nixosModules; [
       nix

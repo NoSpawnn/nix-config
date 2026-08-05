@@ -1,5 +1,4 @@
-{ ... }:
-{
+{ ... }: {
   flake.nixosModules.appimage = { config, lib, ... }: {
     programs.appimage = {
       enable = true;

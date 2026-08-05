@@ -10,9 +10,7 @@
 }:
 
 {
-  imports = [
-    (modulesPath + "/installer/scan/not-detected.nix")
-  ];
+  imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
   boot.initrd.availableKernelModules = [
     "nvme"
@@ -39,9 +37,7 @@
     ];
   };
 
-  swapDevices = [
-    { device = "/dev/disk/by-uuid/b59429cd-8df1-4862-9bf1-e69673477709"; }
-  ];
+  swapDevices = [ { device = "/dev/disk/by-uuid/b59429cd-8df1-4862-9bf1-e69673477709"; } ];
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;

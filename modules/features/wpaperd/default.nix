@@ -6,9 +6,7 @@
 }:
 {
   flake.nixosModules.wpaperd = moduleWithSystem (
-    { self', ... }: {
-      environment.systemPackages = [ self'.packages.wpaperd ];
-    }
+    { self', ... }: { environment.systemPackages = [ self'.packages.wpaperd ]; }
   );
 
   perSystem =
