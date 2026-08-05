@@ -14,7 +14,7 @@
         config = {
           inherit pkgs;
 
-          "config.kdl".path = "${dotfiles}/dots/dot-config/niri/config.kdl";
+          "config.kdl".content = builtins.readFile "${dotfiles}/dots/dot-config/niri/config.kdl";
 
           runtimePkgs =
             with pkgs;
