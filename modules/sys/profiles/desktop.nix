@@ -3,12 +3,15 @@
   flake.nixosModules.desktop = { pkgs, ... }: {
     imports = with self.nixosModules; [
       sysCore
-      niri
+
       homeManager
 
-      # app format support
+      niri
       flatpak
       appimage
+
+      zsh
+      development
     ];
 
     services.pipewire = {

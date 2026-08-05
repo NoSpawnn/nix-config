@@ -1,13 +1,9 @@
-{ self, ... }:
-let
-    username = "N";
-in
-{
-  flake.nixosModules.userN = { pkgs, ... }: {
+{ self, ... }: {
+
+  flake.nixosModules.userN = { ... }: {
     home-manager.users.N = self.homeModules.userN;
     users.users.N = {
       isNormalUser = true;
-      shell = pkgs.zsh;
       ignoreShellProgramCheck = true;
       extraGroups = [
         "networkmanager"
@@ -22,7 +18,6 @@ in
     imports = with self.homeModules; [
       hmCore
       flatpak
-      zsh
     ];
 
     home.username = "N";
@@ -30,27 +25,20 @@ in
 
     # TODO: move these to their own modules (dev, cli, etc)
     home.packages = with pkgs; [
-      tmux
       just
-      git
-      lazygit
       eza
       fastfetch
       starship
       tealdeer
       zoxide
-      neovim
-      devenv
       quickemu
       obs-studio
       btop
-      fzf
-      ripgrep
     ];
 
     home.sessionVariables = {
       "EDITOR" = "nvim";
-     };
+    };
 
     home.stateVersion = "25.11";
 

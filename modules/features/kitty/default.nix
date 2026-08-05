@@ -7,24 +7,19 @@
 
 {
   flake.nixosModules.kitty = moduleWithSystem (
-    { self', ... }: {
-      environment.systemPackages = [ self'.packages.kitty ];
-    }
+    { self', ... }: { environment.systemPackages = [ self'.packages.kitty ]; }
   );
 
-  perSystem =
-    { pkgs, ... }:
-    let
-      font = pkgs.nerd-fonts._0xproto;
-    in
-    {
-      packages.kitty = inputs.wrappers.lib.wrapPackage (
-        { ... }: {
-          inherit pkgs;
-          package = pkgs.kitty;
-          flags."--config" = "${dotfiles}/dots/dot-config/kitty/kitty.conf";
-          env."XDG_DATA_DIRS" = "${font}/share";
-        }
-      );
-    };
+  perSystem = { self', pkgs, ... }: {
+    packages.kitty = inputs.wrappers.wrappers.kitty.wrap (
+      { ... }: {
+        inherit pkgs;
+        runtimePkgs = [
+          self'.packages.zsh
+          pkgs.nerd-fonts._0xproto
+        ];
+        extraConfig = builtins.readFile "${dotfiles}/dots/dot-config/kitty/kitty.conf";
+      }
+    );
+  };
 }

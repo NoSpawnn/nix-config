@@ -1,9 +1,3 @@
-{ ... }:
-{
-  flake.homeModules.hmCore = { pkgs, ... }: {
-    programs.home-manager.enable = true;
-
-    home.packages = with pkgs; [
-    ];
-  };
+{ moduleWithSystem, ... }: {
+  flake.homeModules.hmCore = moduleWithSystem ({ ... }: { programs.home-manager.enable = true; });
 }

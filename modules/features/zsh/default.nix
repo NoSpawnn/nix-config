@@ -1,20 +1,36 @@
-{ moduleWithSystem, ... }:
 {
-  flake.nixosModules.zsh = moduleWithSystem ({ ... }: {
-      programs.zsh = {
-          enable = true;
-          interactiveShellInit = "source ${./zshrc}";
-      };
-  });
+  inputs,
+  moduleWithSystem,
+  dotfiles,
+  ...
+}:
 
-  flake.homeModules.zsh = { config, pkgs, ... }: {
-      programs.zsh = {
+{
+  flake.nixosModules.zsh =
+    let
+      flakePath = builtins.getEnv "PWD";
+    in
+    moduleWithSystem (
+      { self', pkgs, ... }: {
+        nixpkgs.overlays = [ (final: prev: { zsh = self'.packages.zsh; }) ];
+        programs.zsh = {
           enable = true;
-          dotDir = "${config.xdg.configHome}/zsh";
-          initContent = "source ${./zshrc}";
-          autosuggestion.enable = true;
-      };
+          promptInit = (builtins.readFile "${dotfiles}/dots/dot-zshrc"); # + "prompt off";
+          shellAliases = {
+            "nrs" = "sudo nixos-rebuild switch --flake ${flakePath}";
+          };
+        };
+        users.defaultUserShell = pkgs.zsh;
+      }
+    );
+
+  perSystem = { pkgs, ... }: {
+    packages.zsh = inputs.wrappers.wrappers.zsh.wrap {
+      inherit pkgs;
+      runtimePkgs = with pkgs; [
+        starship
+        fzf
+      ];
+    };
   };
-
-  perSystem = { self', ... }: { packages.zsh = self'.packages.zsh; };
 }
