@@ -3,6 +3,7 @@
 
   config._module.args = {
     dotfiles = inputs.dotfiles;
+    utils = import ./_utils.nix { lib = inputs.nixpkgs.lib; };
   };
 
   config.systems = [

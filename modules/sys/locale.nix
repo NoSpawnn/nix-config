@@ -4,7 +4,7 @@ let
   tz = "Europe/London";
 in
 {
-  flake.nixosModules.locale = { pkgs, ... }: {
+  flake.nixosModules.locale = { ... }: {
     time.timeZone = tz;
 
     i18n = {
@@ -22,11 +22,5 @@ in
       };
     };
 
-    services.xserver.xkb = {
-      layout = "us";
-      variant = "";
-    };
-
-    console.keyMap = "us";
   };
 }
