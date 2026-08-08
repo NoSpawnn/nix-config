@@ -7,12 +7,20 @@
 }:
 
 {
-  perSystem = { system, pkgs, ... }: {
+  perSystem = { inputs', pkgs, ... }: {
     packages.niri = inputs.wrappers.wrappers.niri.wrap {
       config = {
         inherit pkgs;
 
         "config.kdl".content = builtins.readFile "${dotfiles}/dots/dot-config/niri/config.kdl";
+
+        prefixVar = [
+          [
+            "XCURSOR_PATH"
+            ":"
+            "${dotfiles}/dots/dot-local/share/icons"
+          ]
+        ];
 
         runtimePkgs =
           with pkgs;
@@ -30,8 +38,8 @@
             xwayland-satellite
           ]
           ++ [
-            inputs.noctalia.packages.${system}.default
-            inputs.niri-scratchpad.packages.${system}.default
+            inputs'.noctalia.packages.default
+            inputs'.niri-scratchpad.packages.default
           ];
       };
     };
