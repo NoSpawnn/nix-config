@@ -31,6 +31,7 @@
         self'.packages.nvim
         starship
         fzf
+        fd
       ];
     };
   };
