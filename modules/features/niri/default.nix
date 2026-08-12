@@ -49,7 +49,7 @@
     { self', pkgs, ... }: {
       imports = with self.nixosModules; [
         ly
-        kitty
+        foot
         otter-launcher
         nemo
         wpaperd

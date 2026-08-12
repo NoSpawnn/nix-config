@@ -7,12 +7,10 @@
         git
         lazygit
         nvim
+        tmux
       ];
 
-      environment.systemPackages = with pkgs; [
-        tmux
-        devenv
-      ];
+      environment.systemPackages = with pkgs; [ devenv ];
     }
   );
 }
