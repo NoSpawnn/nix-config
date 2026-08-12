@@ -14,7 +14,7 @@
     let
       config = builtins.toFile "config.toml" ''
         [any]
-        path = "${dotfiles}/wallpapers/rainy-moon.png"
+        path = "${dotfiles}/wallpapers/solar-system-minimal.png"
       '';
     in
     {
