@@ -38,7 +38,6 @@
             xwayland-satellite
           ]
           ++ [
-            inputs'.noctalia.packages.default
             inputs'.niri-scratchpad.packages.default
           ];
       };
