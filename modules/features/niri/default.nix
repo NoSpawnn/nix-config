@@ -53,6 +53,7 @@
         otter-launcher
         nemo
         wpaperd
+        quickshell
       ];
 
       programs.niri = {
