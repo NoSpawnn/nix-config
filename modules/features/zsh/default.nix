@@ -15,10 +15,6 @@
         enable = true;
         promptInit = builtins.readFile "${dotfiles}/dots/dot-zshrc";
         shellAliases = {
-          "nrs" = "sudo nixos-rebuild switch --flake";
-          "nfu" = "nix flake update";
-
-          # TODO: maybe put these in zshrc guarded behing _command_exists?;
           "nsh" = "nix-shell -p";
         };
       };
