@@ -22,7 +22,7 @@
     otter-launcher.inputs.nixpkgs.follows = "nixpkgs";
 
     self.submodules = true;
-    dotfiles.url = "path:dotfiles";
+    dotfiles.url = "path:./dotfiles";
     dotfiles.flake = false;
 
     import-tree.url = "github:denful/import-tree";

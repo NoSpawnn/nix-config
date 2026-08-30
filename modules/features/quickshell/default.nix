@@ -1,4 +1,10 @@
-{ inputs, dotfiles, moduleWithSystem, ... }: {
+{
+  inputs,
+  dotfiles,
+  moduleWithSystem,
+  ...
+}:
+{
   flake.nixosModules.quickshell = moduleWithSystem (
     { self', ... }: { environment.systemPackages = [ self'.packages.quickshell ]; }
   );
