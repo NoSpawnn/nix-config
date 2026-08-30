@@ -15,10 +15,14 @@
       { ... }: {
         inherit pkgs;
         constructFiles.generatedConfig.content = builtins.readFile "${dotfiles}/dots/dot-config/foot/foot.ini";
-        runtimePkgs = [
-          self'.packages.zsh
-          pkgs.nerd-fonts._0xproto
+        prefixVar = [
+          [
+            "XDG_DATA_DIRS"
+            ":"
+            "${pkgs.nerd-fonts._0xproto}/share"
+          ]
         ];
+        runtimePkgs = [ self'.packages.zsh ];
       }
     );
   };
