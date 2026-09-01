@@ -1,6 +1,3 @@
-# { ... }:
-# {
-#   flake.nixosModules.spawnpoint-hardware =
 {
   pkgs,
   lib,
