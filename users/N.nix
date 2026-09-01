@@ -2,7 +2,7 @@
   system = {
     users.users.N = {
       isNormalUser = true;
-      groups = [
+      extraGroups = [
         "wheel"
         "dialout"
         "networkmanager"
