@@ -2,8 +2,8 @@
   flake.nixosConfigurations.spawnpoint = utils.mkNixosSystem {
     hostname = "spawnpoint";
     keymap = "us";
+    enableUsers = [ "N" ];
     modules = with self.nixosModules; [
-      userN
       desktop
       gaming
       amdDrivers
@@ -11,4 +11,3 @@
     ];
   };
 }
-

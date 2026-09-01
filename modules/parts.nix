@@ -1,9 +1,12 @@
-{ inputs, ... }: {
+{ inputs, self, ... }: {
   imports = [ inputs.home-manager.flakeModules.home-manager ];
 
   config._module.args = {
     dotfiles = inputs.dotfiles;
-    utils = import ./_utils.nix { lib = inputs.nixpkgs.lib; };
+    utils = import ./_utils.nix {
+      lib = inputs.nixpkgs.lib;
+      userProfiles = self.userProfiles;
+    };
   };
 
   config.systems = [
