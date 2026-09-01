@@ -1,4 +1,6 @@
+# meeeee
 { self, ... }: {
+
   system = {
     users.users.N = {
       isNormalUser = true;
@@ -8,16 +10,13 @@
         "networkmanager"
       ];
     };
-  };
+  } // ((import ./_shared.nix).system {});
 
   home = {
-    imports = with self.homeModules; [
-      flatpak
-    ];
+    imports = with self.homeModules; [ flatpak ];
 
     home.username = "N";
     home.homeDirectory = "/home/N";
-    home.sessionVariables."EDITOR" = "nvim";
     services.flatpak.packages = [
       "com.bitwarden.desktop"
       "com.orcaslicer.OrcaSlicer"
@@ -28,7 +27,5 @@
       "org.godotengine.Godot"
       "md.obsidian.Obsidian"
     ];
-
-    home.stateVersion = "25.11";
-  };
+  } // ((import ./_shared.nix).home {});
 }
