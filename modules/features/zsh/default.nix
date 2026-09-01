@@ -27,12 +27,14 @@
       env."STARSHIP_CONFIG" = "${dotfiles}dots/dot-config/starship.toml";
       runtimePkgs = with pkgs; [
         self'.packages.nvim
-        yazi
-        starship
-        fzf
+        eza
         fd
+        fzf
+        starship
+        tealdeer
+        yazi
+        zoxide
       ];
-
     };
   };
 }
