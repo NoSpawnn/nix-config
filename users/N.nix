@@ -15,6 +15,11 @@
   home = {
     imports = with self.homeModules; [ flatpak ];
 
+    services.udiskie = {
+      enable = true;
+      settings.program_options.file_manager = "nemo";
+    };
+
     home.username = "N";
     home.homeDirectory = "/home/N";
     services.flatpak.packages = [
