@@ -13,7 +13,7 @@ vim.lsp.config("nixd", {
                 expr = "import <nixpkgs> { }",
             },
             formatting = {
-                command = { "nixfmt" },
+                command = { "nixfmt", "--strict" },
             },
             options = {
                 nixos = {
