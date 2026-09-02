@@ -2,8 +2,8 @@
   flake.nixosConfigurations.lenowo = utils.mkNixosSystem {
     hostname = "lenowo";
     keymap = "gb";
+    enableUsers = [ "N" ];
     modules = [
-      self.nixosModules.userN
       self.nixosModules.laptop
       ./_hardware-configuration.nix
     ];
