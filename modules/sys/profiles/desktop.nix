@@ -17,6 +17,6 @@
       pulse.enable = true;
     };
 
-    environment.systemPackages = with pkgs; [ corefonts ];
+    environment.systemPackages = [ pkgs.corefonts ];
   };
 }
