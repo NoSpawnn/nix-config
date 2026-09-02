@@ -1,4 +1,4 @@
-{ lib, userProfiles }:
+{ inputs, lib, userProfiles }:
 let
   validUsernames = builtins.attrNames userProfiles;
 
@@ -13,10 +13,11 @@ let
       invalidUsers = lib.filter (name: !lib.elem name validUsernames) enableUsers;
     in
     if invalidUsers != [ ] then
-      throw "Invalid users provided to mkNixosSystem: [${lib.concatStringsSep ", " invalidUsers}]. (possible values: [${lib.concatStringsSep ", " validUsernames}])"
+      throw "Invalid users provided to mkNixosSystem: [ ${lib.concatStringsSep ", " invalidUsers} ] (possible values: [ ${lib.concatStringsSep ", " validUsernames} ])"
     else
       lib.nixosSystem {
         modules = modules ++ [
+          inputs.home-manager.nixosModules.home-manager
           {
             networking.hostName = hostname;
 

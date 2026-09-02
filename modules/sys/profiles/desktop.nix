@@ -3,8 +3,6 @@
     imports = with self.nixosModules; [
       sysCore
 
-      homeManager
-
       niri
       flatpak
       appimage

@@ -4,6 +4,7 @@
   config._module.args = {
     dotfiles = inputs.dotfiles;
     utils = import ./_utils.nix {
+      inherit inputs;
       lib = inputs.nixpkgs.lib;
       userProfiles = self.userProfiles;
     };
